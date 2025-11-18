@@ -1,0 +1,18 @@
+@font-face {
+    font-family: "Archivo";
+    src: url('../src/assets/fonts/Archivo-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: "Archivo";
+    src: url('../src/assets/fonts/Archivo-Bold.ttf') format('truetype');
+}
+@font-face {
+    font-family: "Archivo";
+    src: url('../src/assets/fonts/Archivo-Light.ttf') format('truetype');
+}
+
+@import "tailwindcss";
+
+:root {
+  font-family: "Archivo", sans-serif;
+}
