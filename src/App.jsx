@@ -5,8 +5,19 @@ import TransactionHistory from "./pages/Dashboard/TransactionHistory";
 import SignUp from "./pages/auth/SignUp";
 import VerifyEmail from "./pages/auth/VerifyEmail";
 import Login from "./pages/auth/Login";
+import UserProfile from "./pages/dashboard/UserProfile";
+import MyProfile from "./pages/dashboard/MyProfile";
+import Help from "./pages/dashboard/Help";
+import FAQ from "./pages/dashboard/FAQ";
+import ServiceProvider from "./pages/dashboard/ServiceProvider";
+import SubmitRequest from "./pages/dashboard/SubmitRequest";
+import Notifications from "./pages/dashboard/Notifications";
 import LandingPage from './pages/LandingPage';
 import ScheduleBill from "./pages/schedule/ScheduleBill";
+import WelcomePartners from "./pages/partners/WelcomePartners";
+import ThankYou from "./pages/partners/ThankYou";
+import GetStartedPartners from "./pages/partners/GetStartedPartners";
+
 
 function App() {
   return (
@@ -17,13 +28,23 @@ function App() {
         <Route index element={<Dashboard />} />
         <Route path="transaction-history" element={<TransactionHistory />} />
         <Route path="schedule-bill" element={<ScheduleBill />} />
+        <Route path="user-profile" element={<UserProfile />} />
+        <Route path="my-profile" element={<MyProfile />} />
+        <Route path="help" element={<Help />} />
+        <Route path="faq" element={<FAQ />} />
+        <Route path="service-provider" element={<ServiceProvider />} />
+        <Route path="submit-request" element={<SubmitRequest />} />
+        <Route path="notifications" element={<Notifications />} />
       </Route>
 
       {/* Authentication */}
       <Route path="/sign-up" element={<SignUp />} />
       <Route path="/verify-email" element={<VerifyEmail />} />
       <Route path="/login" element={<Login />} />
-
+      {/* Partners registration */}
+      <Route path="/welcome-partners" element={<WelcomePartners />} />
+      <Route path="/thank-you" element={<ThankYou />} />
+      <Route path="/get-started-partners" element={<GetStartedPartners />} />
     </Routes>
   );
 }
