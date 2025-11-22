@@ -7,7 +7,9 @@ import VerifyEmail from "./pages/auth/VerifyEmail";
 import Login from "./pages/auth/Login";
 import LandingPage from './pages/LandingPage';
 import ScheduleBill from "./pages/schedule/ScheduleBill";
-import BillDetails from "./pages/schedule/BillDetails";
+import WelcomePartners from "./pages/partners/WelcomePartners";
+import ThankYou from "./pages/partners/ThankYou";
+import GetStartedPartners from "./pages/partners/GetStartedPartners";
 
 function App() {
   return (
@@ -25,8 +27,10 @@ function App() {
       <Route path="/verify-email" element={<VerifyEmail />} />
       <Route path="/login" element={<Login />} />
 
-      {/* Schedule bill */}
-      <Route path="/bill-details" element={<BillDetails />} />
+      {/* Partners registration */}
+      <Route path="/welcome-partners" element={<WelcomePartners />} />
+      <Route path="/thank-you" element={<ThankYou />} />
+      <Route path="/get-started-partners" element={<GetStartedPartners />} />
     </Routes>
   );
 }
