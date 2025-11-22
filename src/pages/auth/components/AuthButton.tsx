@@ -4,7 +4,7 @@ const AuthButton = ({ btnTxt, onClick, type }) => {
   return (
     <div>
       <button
-        className="p-3 bg-[#401C6D] w-full rounded-full text-white font-bold"
+        className="py-3 px-4 bg-[#401C6D] w-full rounded-full text-white font-bold text-sm"
         type={type}
         onClick={onClick}
       >
