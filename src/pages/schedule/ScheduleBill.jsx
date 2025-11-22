@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { IoChevronBack } from "react-icons/io5";
 import Button from "../../components/Button";
+import BillDetails from "./BillDetails";
+import ReviewConfirmBill from "./ReviewConfirmBill";
+import ScheduledBills from "./ScheduledBills";
 
-const ScheduleBill = () => {
+const ScheduleBills = ({ onNext }) => {
   return (
     <div className="p-5 sm:p-6 lg:p-8 bg-[#ECE8F0] min-h-screen">
       <div className="flex gap-1 items-center mb-6 md:mb-8">
@@ -81,9 +84,69 @@ const ScheduleBill = () => {
           No surprises, no pressure-just smarter support.
         </span>
 
-        <Button btnTxt="Schedule bill" />
+        <Button btnTxt="Schedule bill" onClick={onNext} />
       </div>
     </div>
+  );
+};
+
+const ScheduleBill = () => {
+  const [page, setPage] = useState(1);
+  const [sponsors, setSponsors] = useState([
+    { id: 1, name: "Ngozi", relationship: "Mother", phone: "080..." },
+  ]);
+
+  const [selectedSponsor, setSelectedSponsor] = useState(null);
+  const [billData, setBillData] = useState(null);
+  const [scheduledBills, setScheduledBills] = useState([]);
+
+  const handleScheduleBill = () => {
+    // Create a new scheduled bill
+    const newBill = {
+      id: Date.now(),
+      ...billData,
+      sponsor: selectedSponsor,
+      status: "Pending",
+      createdAt: new Date().toISOString(),
+    };
+
+    setScheduledBills([...scheduledBills, newBill]);
+    setPage(4); 
+  };
+
+  return (
+    <>
+      {/* CONDITIONAL RENDERING FOR PAGES */}
+      {page === 1 && <ScheduleBills onNext={() => setPage(2)} />}
+
+      {page === 2 && (
+        <BillDetails
+          sponsors={sponsors}
+          selectedSponsor={selectedSponsor}
+          onSelectSponsor={setSelectedSponsor}
+          onAddSponsor={(newSponsor) => setSponsors([...sponsors, newSponsor])}
+          onNext={(billInfo) => {
+            setBillData(billInfo);
+            setPage(3);
+          }}
+          onBack={() => setPage(1)}
+        />
+      )}
+
+      {page === 3 && (
+        <ReviewConfirmBill
+          billData={billData}
+          selectedSponsor={selectedSponsor}
+          onSchedule={handleScheduleBill}
+          onEdit={() => setPage(2)}
+          onCancel={() => setPage(1)}
+        />
+      )}
+
+      {page === 4 && (
+        <ScheduledBills bills={scheduledBills} onBack={() => setPage(1)} />
+      )}
+    </>
   );
 };
 

@@ -7,7 +7,6 @@ import VerifyEmail from "./pages/auth/VerifyEmail";
 import Login from "./pages/auth/Login";
 import LandingPage from './pages/LandingPage';
 import ScheduleBill from "./pages/schedule/ScheduleBill";
-import BillDetails from "./pages/schedule/BillDetails";
 
 function App() {
   return (
@@ -25,8 +24,6 @@ function App() {
       <Route path="/verify-email" element={<VerifyEmail />} />
       <Route path="/login" element={<Login />} />
 
-      {/* Schedule bill */}
-      <Route path="/bill-details" element={<BillDetails />} />
     </Routes>
   );
 }
