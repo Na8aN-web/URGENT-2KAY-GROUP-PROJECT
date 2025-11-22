@@ -1,14 +1,15 @@
-// components/Layout.jsx
 import { Outlet, NavLink, useNavigate } from 'react-router';
-import { Home, FileText, Users, ArrowUpDown, ChevronLeft, HelpCircle, User, LogOut, Bell, Search, Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import { Home, FileText, Users, ArrowUpDown, ChevronLeft, HelpCircle, User, LogOut, Bell, Search, Menu, X, MoreVertical } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
 
 export default function DashboardLayout() {
     const navigate = useNavigate();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+    const [activeTab, setActiveTab] = useState('all');
+    const notificationRef = useRef(null);
 
     const handleLogout = () => {
-        // Add your logout logic here
         console.log('Logging out...');
     };
 
@@ -20,12 +21,101 @@ export default function DashboardLayout() {
         setIsSidebarOpen(false);
     };
 
+    const toggleNotification = () => {
+        setIsNotificationOpen(!isNotificationOpen);
+    };
+
+    const seeAllNotifications = () => {
+        navigate('/dashboard/notifications');
+    };
+
+    // Close notification when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (notificationRef.current && !notificationRef.current.contains(event.target)) {
+                setIsNotificationOpen(false);
+            }
+        };
+
+        if (isNotificationOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isNotificationOpen]);
+
+    const notifications = {
+        today: [
+            {
+                id: 1,
+                name: 'Ugomma',
+                message: 'just sent you an urgent 2Kay request',
+                time: '4 minutes ago',
+                isUnread: true,
+                avatar: '👤'
+            },
+            {
+                id: 2,
+                name: 'Agunwa',
+                message: 'just sent you an urgent 2Kay request',
+                time: '30 minutes ago',
+                isUnread: true,
+                avatar: '👔'
+            },
+            {
+                id: 3,
+                name: 'Omah',
+                message: 'just Approved your urgent 2Kay request',
+                time: '1 hour ago',
+                isUnread: true,
+                avatar: '👨'
+            }
+        ],
+        thisWeek: [
+            {
+                id: 4,
+                name: 'Ugomma',
+                message: 'just sent you an urgent 2Kay request',
+                time: '6 May',
+                isUnread: false,
+                avatar: '👤'
+            },
+            {
+                id: 5,
+                name: 'Ashley',
+                message: 'just Approved your urgent 2Kay request',
+                time: '6 May',
+                isUnread: false,
+                avatar: '👩'
+            },
+            {
+                id: 6,
+                name: 'Emeka',
+                message: 'just Approved your urgent 2Kay request',
+                time: '1 hour ago',
+                isUnread: false,
+                avatar: '👨‍💼'
+            }
+        ]
+    };
+
+    const filteredNotifications = activeTab === 'unread' 
+        ? {
+            today: notifications.today.filter(n => n.isUnread),
+            thisWeek: notifications.thisWeek.filter(n => n.isUnread)
+          }
+        : notifications;
+
+    const unreadCount = [...notifications.today, ...notifications.thisWeek].filter(n => n.isUnread).length;
+
     return (
         <div className="flex h-screen bg-gray-50">
             {/* Overlay for mobile */}
             {isSidebarOpen && (
                 <div
-                    className="fixed inset-0  bg-opacity-50 z-40 lg:hidden"
+                    className="fixed inset-0 bg-opacity-50 z-40 lg:hidden"
                     onClick={closeSidebar}
                 ></div>
             )}
@@ -35,7 +125,6 @@ export default function DashboardLayout() {
                 className={`fixed lg:static inset-y-0 left-0 z-50 md:w-64 w-full bg-[#1B0B2E] text-white flex flex-col transform transition-transform duration-300 ease-in-out lg:translate-x-0 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
                     }`}
             >
-                {/* Close button for mobile */}
                 <button
                     onClick={closeSidebar}
                     className="absolute top-4 right-4 lg:hidden p-2 hover:bg-white/10 rounded-lg transition-colors"
@@ -115,7 +204,7 @@ export default function DashboardLayout() {
                     </NavLink>
 
                     <NavLink
-                        to="/dashboard/profile"
+                        to="/dashboard/user-profile"
                         onClick={closeSidebar}
                         className={({ isActive }) =>
                             `w-full flex items-center gap-3 px-4 py-3 rounded-lg mb-4 transition-colors ${isActive ? 'bg-white/10' : 'hover:bg-white/5'
@@ -142,7 +231,6 @@ export default function DashboardLayout() {
                 <div className="bg-[#ECE8F0] border-b-2 border-[#1B0B2E1A] px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
                     <div className="flex items-center justify-between gap-4">
                         <div className="flex items-center gap-4 lg:gap-8 flex-1">
-                            {/* Hamburger Menu Button */}
                             <button
                                 onClick={toggleSidebar}
                                 className="lg:hidden p-2 hover:bg-gray-200 rounded-lg transition-colors"
@@ -155,7 +243,6 @@ export default function DashboardLayout() {
                                 <p className="text-xs text-gray-500">Let's simplify your finances!</p>
                             </div>
 
-                            {/* Search - Hidden on small screens */}
                             <div className="relative hidden md:block flex-1 max-w-md">
                                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                                 <input
@@ -167,15 +254,133 @@ export default function DashboardLayout() {
                         </div>
 
                         <div className="flex items-center gap-2 sm:gap-4">
-                            {/* Connect Wallet - Hidden on small screens */}
                             <button className="hidden sm:block px-4 lg:px-6 py-2 bg-[#401A6D] text-white rounded-[58px] font-semibold hover:bg-purple-800 text-xs lg:text-sm transition-colors">
                                 Connect Wallet
                             </button>
 
-                            <button className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors">
-                                <Bell className="w-5 h-5 sm:w-6 sm:h-6 text-black" />
-                                <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-                            </button>
+                            {/* Notification Bell with Dropdown */}
+                            <div className="relative" ref={notificationRef}>
+                                <button 
+                                    onClick={toggleNotification}
+                                    className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                                >
+                                    <Bell className="w-5 h-5 sm:w-6 sm:h-6 text-black" />
+                                    {unreadCount > 0 && (
+                                        <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                                    )}
+                                </button>
+
+                                {/* Notification Dropdown */}
+                                {isNotificationOpen && (
+                                    <div className="absolute -right-10 md:right-0 mt-2 w-96 bg-white rounded-2xl shadow-xl border border-gray-200 z-50 max-h-[600px] overflow-hidden">
+                                        {/* Header */}
+                                        <div className="p-4 border-b border-gray-100">
+                                            <div className="flex items-center justify-between mb-4">
+                                                <h2 className="text-lg font-bold text-gray-900">Notifications</h2>
+                                                <button className="p-1 hover:bg-gray-100 rounded-lg transition-colors">
+                                                    <MoreVertical className="w-5 h-5 text-gray-600" />
+                                                </button>
+                                            </div>
+                                            
+                                            {/* Tabs */}
+                                            <div className="flex gap-2">
+                                                <button 
+                                                    onClick={() => setActiveTab('all')}
+                                                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                                                        activeTab === 'all' 
+                                                            ? 'bg-[#1B0B2E] text-white' 
+                                                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                                    }`}
+                                                >
+                                                    All
+                                                </button>
+                                                <button 
+                                                    onClick={() => setActiveTab('unread')}
+                                                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                                                        activeTab === 'unread' 
+                                                            ? 'bg-[#1B0B2E] text-white' 
+                                                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                                    }`}
+                                                >
+                                                    Unread
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        {/* Notifications List */}
+                                        <div className="overflow-y-auto max-h-[480px]">
+                                            {/* Today Section */}
+                                            {filteredNotifications.today.length > 0 && (
+                                                <div className="p-4">
+                                                    <div className="flex items-center justify-between mb-3">
+                                                        <h3 className="text-sm font-bold text-gray-900">Today</h3>
+                                                        <button onClick={seeAllNotifications} className="text-xs text-purple-600 hover:text-purple-700 font-medium">
+                                                            See all
+                                                        </button>
+                                                    </div>
+                                                    
+                                                    {filteredNotifications.today.map((notification) => (
+                                                        <div 
+                                                            key={notification.id}
+                                                            className="flex items-start gap-3 p-3 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors mb-2"
+                                                        >
+                                                            <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 text-lg">
+                                                                {notification.avatar}
+                                                            </div>
+                                                            <div className="flex-1 min-w-0">
+                                                                <p className="text-sm text-gray-900">
+                                                                    <span className="font-semibold text-purple-600">{notification.name}</span>
+                                                                    {' '}{notification.message}
+                                                                </p>
+                                                                <p className="text-xs text-gray-500 mt-1">{notification.time}</p>
+                                                            </div>
+                                                            {notification.isUnread && (
+                                                                <div className="w-2 h-2 bg-red-500 rounded-full flex-shrink-0 mt-2"></div>
+                                                            )}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            )}
+
+                                            {/* This Week Section */}
+                                            {filteredNotifications.thisWeek.length > 0 && (
+                                                <div className="p-4 border-t border-gray-100">
+                                                    <h3 className="text-sm font-bold text-gray-900 mb-3">This Week</h3>
+                                                    
+                                                    {filteredNotifications.thisWeek.map((notification) => (
+                                                        <div 
+                                                            key={notification.id}
+                                                            className="flex items-start gap-3 p-3 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors mb-2"
+                                                        >
+                                                            <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 text-lg">
+                                                                {notification.avatar}
+                                                            </div>
+                                                            <div className="flex-1 min-w-0">
+                                                                <p className="text-sm text-gray-900">
+                                                                    <span className="font-semibold text-purple-600">{notification.name}</span>
+                                                                    {' '}{notification.message}
+                                                                </p>
+                                                                <p className="text-xs text-gray-500 mt-1">{notification.time}</p>
+                                                            </div>
+                                                            {notification.isUnread && (
+                                                                <div className="w-2 h-2 bg-red-500 rounded-full flex-shrink-0 mt-2"></div>
+                                                            )}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            )}
+
+                                            {/* Empty State */}
+                                            {filteredNotifications.today.length === 0 && filteredNotifications.thisWeek.length === 0 && (
+                                                <div className="p-8 text-center">
+                                                    <Bell className="w-12 h-12 text-gray-300 mx-auto mb-2" />
+                                                    <p className="text-sm text-gray-500">No notifications yet</p>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
 
                             <button
                                 onClick={() => navigate('/profile')}
