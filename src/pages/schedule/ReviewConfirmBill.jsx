@@ -1,8 +1,8 @@
 import React from "react";
 import avatar from "./images/avatar.png";
-import InputField from "./components/InputField";
 import Button from "../../components/Button";
 import ButtonGold from "../../components/ButtonGold";
+import InputField from "../../components/InputField";
 
 const ReviewConfirmBill = () => {
   return (

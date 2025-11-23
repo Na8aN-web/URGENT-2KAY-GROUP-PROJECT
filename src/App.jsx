@@ -17,6 +17,7 @@ import ScheduleBill from "./pages/schedule/ScheduleBill";
 import WelcomePartners from "./pages/partners/WelcomePartners";
 import ThankYou from "./pages/partners/ThankYou";
 import GetStartedPartners from "./pages/partners/GetStartedPartners";
+import Relationship from "./pages/relationship/Relationship";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route index element={<Dashboard />} />
         <Route path="transaction-history" element={<TransactionHistory />} />
         <Route path="schedule-bill" element={<ScheduleBill />} />
+        <Route path="relationships" element={<Relationship />} />
         <Route path="user-profile" element={<UserProfile />} />
         <Route path="my-profile" element={<MyProfile />} />
         <Route path="help" element={<Help />} />

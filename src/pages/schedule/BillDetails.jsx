@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { IoChevronBack } from "react-icons/io5";
-import InputField from "./components/InputField";
+import InputField from "../../components/InputField";
 import avatar from "./images/avatar.png";
 import Button from "../../components/Button";
 import ButtonGold from "../../components/ButtonGold";
