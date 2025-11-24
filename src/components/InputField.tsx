@@ -4,6 +4,11 @@ const InputField = ({
   inputLabel,
   placeholder = "Input Text",
   inputSpan,
+  value,
+  onChange,
+  readOnly = false,
+  required = false,
+  type = "text",
   className,
 }) => {
   return (
@@ -12,8 +17,12 @@ const InputField = ({
         {inputLabel}
       </label>
       <input
-        type="text"
         placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        readOnly={readOnly}
+        required={required}
+        type="text"
         className={`border border-[#DBDDE0] w-full bg-white rounded-sm px-4 py-2 text-sm text-[#A8A8A8] ${className}`}
       />
       <span className="text-xs text-[#525252] font-normal">{inputSpan}</span>

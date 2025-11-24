@@ -17,6 +17,12 @@ import ScheduleBill from "./pages/schedule/ScheduleBill";
 import WelcomePartners from "./pages/partners/WelcomePartners";
 import ThankYou from "./pages/partners/ThankYou";
 import GetStartedPartners from "./pages/partners/GetStartedPartners";
+import Relationships from "./pages/relationship/Relationships";
+import CreateRelationship from "./pages/relationship/CreateRelationship";
+import MyRelationships from "./pages/relationship/MyRelationships";
+import PaymentDetails from "./pages/relationship/PaymentDetails";
+import EditSponsorProfile from "./pages/relationship/EditSponsorProfile";
+import SponsorProfile from "./pages/relationship/SponsorProfile";
 import BundleSuccessPage from "./pages/GenerateRequest/BundleSuccessPage.jsx";
 import GenerateRequestPage from "./pages/GenerateRequest/GenerateRequestPage.jsx";
 import AllServicesPage from "./pages/GenerateRequest/AllServicesPage.jsx";
@@ -68,6 +74,12 @@ function App() {
         />
         <Route path="transaction-history" element={<TransactionHistory />} />
         <Route path="schedule-bill" element={<ScheduleBill />} />
+        <Route path="relationships" element={<Relationships />} />
+        <Route path="create-relationship" element={<CreateRelationship />} />
+        <Route path="my-relationships" element={<MyRelationships />} />
+        <Route path="payment-details" element={<PaymentDetails />} />
+        <Route path="edit-sponsor-profile" element={<EditSponsorProfile />} />
+        <Route path="sponsor-profile" element={<SponsorProfile />} />
         <Route path="user-profile" element={<UserProfile />} />
         <Route path="my-profile" element={<MyProfile />} />
         <Route path="help" element={<Help />} />
@@ -81,7 +93,6 @@ function App() {
       <Route path="/sign-up" element={<SignUp />} />
       <Route path="/verify-email" element={<VerifyEmail />} />
       <Route path="/login" element={<Login />} />
-
       {/* Partners registration */}
       <Route path="/welcome-partners" element={<WelcomePartners />} />
       <Route path="/thank-you" element={<ThankYou />} />

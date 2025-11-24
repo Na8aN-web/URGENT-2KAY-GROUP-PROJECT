@@ -1,14 +1,27 @@
 import React, { useState } from "react";
 import { IoChevronBack } from "react-icons/io5";
-import InputField from "./components/InputField";
+import InputField from "../../components/InputField";
 import avatar from "./images/avatar.png";
 import Button from "../../components/Button";
 import ButtonGold from "../../components/ButtonGold";
 
-const AddNewSponsor = ({ onClose, setShowSuccess, setShowModal }) => {
-  const handleClick = () => {
-    setShowModal(false);
-    setShowSuccess(true);
+const AddNewSponsor = ({ onClose, onAddSponsor }) => {
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [relationship, setRelationship] = useState("");
+
+  const handleAdd = (e) => {
+    e.preventDefault();
+
+    const newSponsor = {
+      id: Date.now(),
+      name,
+      phone,
+      relationship,
+    };
+
+    onAddSponsor(newSponsor);
+    onClose();
   };
   return (
     <div className="relative w-full max-w-[600px] bg-white py-10 px-4 md:py-20 md:px-8 rounded-lg">
@@ -19,23 +32,37 @@ const AddNewSponsor = ({ onClose, setShowSuccess, setShowModal }) => {
       >
         ✕
       </button>
-      <form className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-x-20 md:gap-y-8">
-        <InputField inputLabel="Sponsor Full Name" placeholder="Enter name" />
+      <form
+        className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-x-20 md:gap-y-8"
+        onSubmit={handleAdd}
+      >
+        <InputField
+          inputLabel="Sponsor Full Name"
+          placeholder="Enter name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
 
         <InputField
           inputLabel="Sponsor Phone Number"
           placeholder="Enter phone number"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
         />
 
         <InputField inputLabel="Email Address" placeholder="Enter email" />
 
         <InputField
-          inputLabel="Relationshipb Type"
+          inputLabel="Relationship Type"
           placeholder="Mother"
-          inputSpan="E.g Father, Mother, Sister, Brother, Friend"
+          inputSpan="e.g Father, Mother, Sister..."
+          value={relationship}
+          onChange={(e) => setRelationship(e.target.value)}
         />
 
-        <Button btnTxt="Add Sponsor" onClick={handleClick} />
+        <button type="submit">
+          <Button btnTxt="Add Sponsor" />
+        </button>
       </form>
     </div>
   );
@@ -108,8 +135,12 @@ const ScheduleSuccess = ({ onClose }) => {
           </g>
         </svg>
 
-        <p className="text-base font-semibold text-[#000000]">Your bill has been scheduled successfully</p>
-        <p className="text-xs text-[#686363] font-normal">We'll remind you before it's sent</p>
+        <p className="text-base font-semibold text-[#000000]">
+          Your bill has been scheduled successfully
+        </p>
+        <p className="text-xs text-[#686363] font-normal">
+          We'll remind you before it's sent
+        </p>
 
         <div className="space-y-4 pt-6">
           <Button btnTxt="View Scheduled Bill" />
@@ -120,7 +151,12 @@ const ScheduleSuccess = ({ onClose }) => {
   );
 };
 
-const BillDetails = () => {
+const BillDetails = ({
+  onNext,
+  sponsors,
+  onAddSponsor,
+  onSelectSponsor,
+}) => {
   const [showModal, setShowModal] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
@@ -168,13 +204,23 @@ const BillDetails = () => {
         <h2 className="text-base text-[#252323] font-bold pb-8">
           Choose Sponsor
         </h2>
-        <div className="flex gap-6 sm:gap-12 items-center w-full pb-12 sm:pb-16">
-          <img src={avatar} alt="" className="w-[67px] h-[67px]" />
-          <p className="text-sm text-[#201F1F] font-bold">
-            <span className="text-[#7e7a7a]">Mother</span>/Ngozi
-          </p>
-          <Button btnTxt="Choose" className="max-w-[100px]" />
-        </div>
+        {sponsors.map((sp) => (
+          <div
+            key={sp.id}
+            className="flex gap-4 items-center pb-8 sm:pb-12 cursor-pointer"
+            onClick={() => {
+              onSelectSponsor(sp);
+              onNext(); // go to Review & Confirm
+            }}
+          >
+            <img src={avatar} className="w-[60px] h-[60px]" />
+            <p className="text-sm font-bold">
+              <span className="text-gray-500">{sp.relationship}</span>/{sp.name}
+            </p>
+
+            <Button btnTxt="Choose" />
+          </div>
+        ))}
 
         {/* Open modal button */}
         <ButtonGold
@@ -187,9 +233,8 @@ const BillDetails = () => {
       {showModal && (
         <div className="fixed inset-0 bg-black/80 bg-opacity-40 flex justify-center items-center z-50 w-full px-6">
           <AddNewSponsor
-            onClose={() => setShowModal(false)}
-            setShowSuccess={setShowSuccess}
-            setShowModal={setShowModal}
+                onClose={() => setShowModal(false)}
+                onAddSponsor={onAddSponsor}
           />
         </div>
       )}

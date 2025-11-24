@@ -1,6 +1,5 @@
 import React from "react";
 import { IoChevronBack } from "react-icons/io5";
-import InputField from "./components/InputField";
 import Button from "../../components/Button";
 import ButtonGold from "../../components/ButtonGold";
 
