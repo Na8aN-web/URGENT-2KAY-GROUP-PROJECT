@@ -1,58 +1,8 @@
 import React, { useState } from "react";
 import avatar from "./images/avatar.png";
-import InputField from "./components/InputField";
 import Button from "../../components/Button";
 import ButtonGold from "../../components/ButtonGold";
-import { IoChevronBack } from "react-icons/io5";
-import { useNavigate } from "react-router";
-
-const ScheduleSuccess = ({ onClose }) => {
-  const navigate = useNavigate()
-  return (
-    <div className="relative w-full max-w-[600px] bg-white py-10 px-4 md:py-20 md:px-8 rounded-lg">
-      <button
-        onClick={onClose}
-        className="absolute top-3 right-3 text-gray-600 text-xl font-bold"
-      >
-        ✕
-      </button>
-
-      <div className="text-center flex flex-col justify-center items-center">
-        <svg
-          viewBox="0 0 200 200"
-          className="w-full h-auto max-h-[250px] sm:max-h-[350px] pb-8"
-        >
-          <circle cx="100" cy="60" r="40" fill="#F3E8D2" opacity="0.3" />
-          <ellipse cx="100" cy="180" rx="60" ry="10" fill="#E5E5E5" />
-
-          <ellipse cx="100" cy="50" rx="12" ry="15" fill="#333" />
-          <rect x="88" y="65" width="24" height="35" rx="2" fill="#666" />
-          <rect x="88" y="100" width="10" height="30" rx="2" fill="#666" />
-          <rect x="102" y="100" width="10" height="30" rx="2" fill="#666" />
-
-          <path
-            d="M 75 70 Q 75 60 85 60 L 85 50 Q 85 45 90 45 L 110 45 Q 115 45 115 50 L 115 60 Q 125 60 125 70 L 125 110 Q 125 120 115 120 L 85 120 Q 75 120 75 110 Z"
-            fill="#F4C430"
-          />
-          <rect x="90" y="75" width="20" height="30" rx="3" fill="#E5B02E" />
-          <circle cx="95" cy="90" r="3" fill="#666" />
-        </svg>
-
-        <p className="text-base font-semibold text-[#000000]">
-          Your bill has been scheduled successfully
-        </p>
-        <p className="text-xs text-[#686363] font-normal">
-          We'll remind you before it's sent
-        </p>
-
-        <div className="space-y-4 pt-6">
-          <Button btnTxt="View Scheduled Bill" onClick={() => navigate("/dashboard/schedule-bills")}/>
-          <ButtonGold btnTxt="Share with Sponsor" />
-        </div>
-      </div>
-    </div>
-  );
-};
+import InputField from "../../components/InputField";
 
 const ReviewConfirmBill = () => {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
