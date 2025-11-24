@@ -1,10 +1,13 @@
 import React from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
+import "./PartnersLayout.css";
 
 const PartnersLayout = ({ children, showText }) => {
   return (
     <div className="bg-[#f0edf3] md:flex w-full min-h-screen">
-      <section className="hidden bg-purple-950 md:flex md:flex-col md:justify-between md:flex-1 p-12">
+      <section
+        className="partner-section-desktop hidden md:flex md:flex-col md:justify-between md:flex-1 p-12"
+      >
         <p className="text-xl text-white">Urgent2kay</p>
         {showText && (
           <p className="text-xl text-white">
@@ -12,7 +15,7 @@ const PartnersLayout = ({ children, showText }) => {
           </p>
         )}
       </section>
-      <section className="px-3 md:p-12 pb-36 flex flex-col justify-end md:justify-center items-center md:flex-1 min-h-screen bg-purple-900 md:bg-transparent">
+      <section className="partner-section-mobile px-3 md:p-12 pb-36 flex flex-col justify-end md:justify-center items-center md:flex-1 min-h-screen">
         <div className="px-4 w-full">{children}</div>
       </section>
     </div>

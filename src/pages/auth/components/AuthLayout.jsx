@@ -42,7 +42,7 @@ const AuthLayout = ({
         <div className="text-center mb-10 space-y-2 md:hidden">
           <p className="text-2xl text-purple-900">Urgent2kay</p>
           {showSubtitle && (
-            <p className="text-base font-extralight">{subTitle}</p>
+            <p className="text-base font-normal text-[#2A2626]">{subTitle}</p>
           )}
         </div>
         <div className="px-4 w-full max-w-sm">{children}</div>

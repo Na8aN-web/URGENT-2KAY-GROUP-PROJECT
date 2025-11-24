@@ -114,8 +114,8 @@ const Login = () => {
         footerActionText="Sign up"
         to="/sign-up"
       >
-        <h2 className="text-4xl pb-8">Login</h2>
-        <form action="" className="space-y-4" onSubmit={handleSubmit}>
+        <h2 className="text-4xl pb-8 font-meduim">Login</h2>
+        <form action="" className="space-y-6" onSubmit={handleSubmit}>
           <InputField
             label="Email address"
             type="text"
@@ -130,7 +130,7 @@ const Login = () => {
 
           <AuthButton btnTxt="Login" type="submit" />
         </form>
-        <p className="text-xs text-center pt-2">
+        <p className="text-sm text-center pt-2 text-[#525252]">
           Don't have an account?
           <Link to="/sign-up" className="text-[#401C6D] font-extrabold">
             Sign up
