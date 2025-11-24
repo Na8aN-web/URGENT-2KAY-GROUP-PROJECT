@@ -238,9 +238,9 @@ export default function DashboardLayout() {
             </div>
 
             {/* Main Content */}
-            <div className="flex-1 bg-[#ECE8F0] overflow-auto">
+            <div className="flex-1 overflow-auto">
                 {/* Header */}
-                <div className="bg-[#ECE8F0] border-b-2 border-[#1B0B2E1A] px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
+                <div className="bg-white border-b-2 border-[#1B0B2E1A] px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
                     <div className="flex items-center justify-between gap-4">
                         <div className="flex items-center gap-4 lg:gap-8 flex-1">
                             <button
