@@ -14,6 +14,9 @@ import SubmitRequest from "./pages/dashboard/SubmitRequest";
 import Notifications from "./pages/dashboard/Notifications";
 import LandingPage from "./pages/LandingPage";
 import ScheduleBill from "./pages/schedule/ScheduleBill";
+import ScheduleBills from "./pages/schedule/ScheduledBills";
+import BillDetails from "./pages/schedule/BillDetails";
+import ReviewConfirmBill from "./pages/schedule/ReviewConfirmBill";
 import WelcomePartners from "./pages/partners/WelcomePartners";
 import ThankYou from "./pages/partners/ThankYou";
 import GetStartedPartners from "./pages/partners/GetStartedPartners";
@@ -74,6 +77,9 @@ function App() {
         />
         <Route path="transaction-history" element={<TransactionHistory />} />
         <Route path="schedule-bill" element={<ScheduleBill />} />
+        <Route path="schedule-bills" element={<ScheduleBills />} />
+        <Route path="bill-details" element={<BillDetails />} />
+        <Route path="confirm-details" element={<ReviewConfirmBill />} />
         <Route path="relationships" element={<Relationships />} />
         <Route path="create-relationship" element={<CreateRelationship />} />
         <Route path="my-relationships" element={<MyRelationships />} />

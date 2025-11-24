@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import avatar from "./images/avatar.png";
 import Button from "../../components/Button";
 import ButtonGold from "../../components/ButtonGold";
 import InputField from "../../components/InputField";
 
 const ReviewConfirmBill = () => {
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
   return (
     <div className="p-5 sm:p-6 lg:p-8 bg-[#ECE8F0] min-h-screen">
       <div className="flex gap-1 items-center mb-6 md:mb-8">
@@ -40,11 +41,21 @@ const ReviewConfirmBill = () => {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3 w-full">
-          <Button btnTxt="Schedule Bill" className="w-full" />
+          <Button
+            btnTxt="Schedule Bill"
+            className="w-full"
+            onClick={() => setShowSuccessModal(true)}
+          />
           <ButtonGold btnTxt="Edit" className="w-full" />
           <ButtonGold btnTxt="Cancel" className="w-full" />
         </div>
       </div>
+
+      {showSuccessModal && (
+        <div className="fixed inset-0 bg-black/80 flex justify-center items-center z-50 w-full px-6">
+          <ScheduleSuccess onClose={() => setShowSuccessModal(false)} />
+        </div>
+      )}
     </div>
   );
 };

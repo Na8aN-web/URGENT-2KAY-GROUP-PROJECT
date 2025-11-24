@@ -3,7 +3,7 @@ import { IoChevronBack } from "react-icons/io5";
 import Button from "../../components/Button";
 import ButtonGold from "../../components/ButtonGold";
 
-const ScheduledBill = () => {
+const ScheduledBills = () => {
 
   return (
     <div className="p-4 sm:p-6 lg:p-8 bg-[#ECE8F0] min-h-screen">
@@ -37,7 +37,7 @@ const ScheduledBill = () => {
             Time: <span className="font-semibold">9:00am</span>
           </p>
           <p>
-            Status:{" "}
+            Status:
             <span className="font-semibold text-yellow-600">Pending</span>
           </p>
         </div>
@@ -53,4 +53,4 @@ const ScheduledBill = () => {
   );
 };
 
-export default ScheduledBill;
+export default ScheduledBills;
