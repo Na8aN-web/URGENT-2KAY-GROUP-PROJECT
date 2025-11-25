@@ -1,17 +1,17 @@
 import { Routes, Route } from "react-router";
-import Dashboard from "./pages/Dashboard/Dashboard";
-import DashboardLayout from "./pages/Dashboard/components/DashboardLayout";
-import TransactionHistory from "./pages/Dashboard/TransactionHistory";
+import Dashboard from "./pages/dashboard/UserDashboard.jsx";
+import DashboardLayout from "./pages/dashboard/components/DashboardLayout.jsx";
+import TransactionHistory from "./pages/dashboard/TransactionHistory.jsx";
 import SignUp from "./pages/auth/SignUp";
 import VerifyEmail from "./pages/auth/VerifyEmail";
 import Login from "./pages/auth/Login";
 import UserProfile from './pages/dashboard/UserProfile.jsx'
-import MyProfile from "./pages/dashboard/MyProfile";
-import Help from "./pages/dashboard/Help";
-import FAQ from "./pages/dashboard/FAQ";
-import ServiceProvider from "./pages/dashboard/ServiceProvider";
-import SubmitRequest from "./pages/dashboard/SubmitRequest";
-import Notifications from "./pages/dashboard/Notifications";
+import MyProfile from "./pages/dashboard/MyProfile.jsx";
+import Help from "./pages/dashboard/Help.jsx";
+import FAQ from "./pages/dashboard/FAQ.jsx";
+import ServiceProvider from "./pages/dashboard/ServiceProvider.jsx";
+import SubmitRequest from "./pages/dashboard/SubmitRequest.jsx";
+import Notifications from "./pages/dashboard/Notifications.jsx";
 import LandingPage from "./pages/LandingPage";
 import ScheduleBill from "./pages/schedule/ScheduleBill";
 import ScheduleBills from "./pages/schedule/ScheduledBills";
@@ -26,18 +26,18 @@ import MyRelationships from "./pages/relationship/MyRelationships";
 import PaymentDetails from "./pages/relationship/PaymentDetails";
 import EditSponsorProfile from "./pages/relationship/EditSponsorProfile";
 import SponsorProfile from "./pages/relationship/SponsorProfile";
-import BundleSuccessPage from "./pages/GenerateRequest/BundleSuccessPage.jsx";
-import GenerateRequestPage from "./pages/GenerateRequest/GenerateRequestPage.jsx";
-import AllServicesPage from "./pages/GenerateRequest/AllServicesPage.jsx";
-import ServicePaymentPage from "./pages/GenerateRequest/ServicePaymentPage.jsx";
-import ReferralPage from "./pages/GenerateRequest/ReferralPage.jsx";
-import SponsorSelectionPage from "./pages/GenerateRequest/SponsorSelectionPage.jsx";
-import AddNewSponsorPage from "./pages/GenerateRequest/AddNewSponsorPage.jsx";
-import BundleOverviewPage from "./pages/GenerateRequest/BundleOverviewPage.jsx";
-import RequestSentFinalPage from "./pages/GenerateRequest/RequestSentFinalPage.jsx";
-import ShoppingPaymentPage from "./pages/GenerateRequest/ShoppingPaymentPage.jsx";
-import ShoppingOrderEntryPage from "./pages/GenerateRequest/ShoppingOrderEntryPage.jsx";
-import ItemsAddedPage from "./pages/GenerateRequest/ItemAddedPage.jsx";
+import BundleSuccessPage from "./pages/generate-request/BundleSuccessPage.jsx";
+import GenerateRequestPage from "./pages/generate-request/GenerateRequestPage.jsx";
+import AllServicesPage from "./pages/generate-request/AllServicesPage.jsx";
+import ServicePaymentPage from "./pages/generate-request/ServicePaymentPage.jsx";
+import ReferralPage from "./pages/generate-request/ReferralPage.jsx";
+import SponsorSelectionPage from "./pages/generate-request/SponsorSelectionPage.jsx";
+import AddNewSponsorPage from "./pages/generate-request/AddNewSponsorPage.jsx";
+import BundleOverviewPage from "./pages/generate-request/BundleOverviewPage.jsx";
+import RequestSentFinalPage from "./pages/generate-request/RequestSentFinalPage.jsx";
+import ShoppingPaymentPage from "./pages/generate-request/ShoppingPaymentPage.jsx";
+import ShoppingOrderEntryPage from "./pages/generate-request/ShoppingOrderEntryPage.jsx";
+import ItemsAddedPage from "./pages/generate-request/ItemAddedPage.jsx";
 
 
 function App() {

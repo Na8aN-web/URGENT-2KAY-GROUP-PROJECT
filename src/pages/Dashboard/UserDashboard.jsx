@@ -2,7 +2,7 @@ import { ChevronLeft, Search, Layers, CreditCard, Calendar, UserPlus } from "luc
 import { StatCard } from "./components/StatCard";
 import { ActionCard } from "./components/ActionCard";
 
-export default function Dashboard() {
+export default function UserDashboard() {
   const activities = [];
 
   return (
