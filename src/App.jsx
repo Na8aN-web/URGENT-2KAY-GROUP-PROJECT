@@ -5,7 +5,7 @@ import TransactionHistory from "./pages/Dashboard/TransactionHistory";
 import SignUp from "./pages/auth/SignUp";
 import VerifyEmail from "./pages/auth/VerifyEmail";
 import Login from "./pages/auth/Login";
-import UserProfile from "./pages/dashboard/UserProfile";
+import UserProfile from './pages/dashboard/UserProfile.jsx'
 import MyProfile from "./pages/dashboard/MyProfile";
 import Help from "./pages/dashboard/Help";
 import FAQ from "./pages/dashboard/FAQ";
