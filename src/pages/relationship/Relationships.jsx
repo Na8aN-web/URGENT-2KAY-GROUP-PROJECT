@@ -11,7 +11,7 @@ const Relationship = () => {
   };
 
   return (
-    <div className="p-6 lg:p-8 bg-[#ECE8F0]">
+    <div className="p-6 lg:p-8 bg-[#ECE8F0] min-h-screen">
       <div className="flex flex-col items-center justify-center pt-16 sm:pt-22">
         <img src={people} alt="people.png" className="h-56 w-56 md:h-56 md:w-56" />
 

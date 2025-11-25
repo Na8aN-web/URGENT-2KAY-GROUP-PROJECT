@@ -1,0 +1,19 @@
+.partner-section-mobile {
+  background-image: url("../../../assets/images/partners-bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.partner-section-desktop {
+  background-image: url("../../../assets/images/partners-bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+@media (min-width: 768px) {
+  .partner-section-mobile {
+    background-image: none;
+  }
+}

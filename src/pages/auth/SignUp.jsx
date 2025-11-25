@@ -20,7 +20,7 @@ const SignUp = () => {
       to="/login"
     >
       <h2 className="text-4xl pb-8">Sign Up</h2>
-      <form action="" className="space-y-4" onSubmit={handleSubmit}>
+      <form action="" className="space-y-6" onSubmit={handleSubmit}>
         <InputField
           label="First Name"
           type="text"
@@ -51,9 +51,9 @@ const SignUp = () => {
           placeholder="Enter password"
         />
 
-        <div className="flex gap-1 justify-self-start">
+        <div className="flex gap-2 items-start">
           <input type="checkbox" name="" id="" />
-          <span className="text-[10px]">
+          <span className="text-sm">
             I agree to Urgent 2Kay's Terms and Conditions, Privacy Policy and
             Cookies Policy
           </span>
@@ -61,7 +61,7 @@ const SignUp = () => {
 
         <AuthButton btnTxt="Sign up" type="submit"/>
       </form>
-      <p className="text-xs text-center pt-2">
+      <p className="text-sm text-center pt-2">
         Already have an account?
         <Link to="/login" className="text-[#401C6D] font-extrabold">
           Sign in

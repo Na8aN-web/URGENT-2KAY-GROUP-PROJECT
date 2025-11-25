@@ -1,6 +1,9 @@
+import { useNavigate } from "react-router";
 import Image6 from "../assets/images/image6.png";
 
 const PartnerSection = () => {
+  const navigate = useNavigate()
+
   return (
     <section className="lg:w-[82%] mx-auto px-6 py-20 bg-[#ECE8F0] mt-10 mb-10">
       <div className="flex flex-col md:flex-row items-center md:gap-10">
@@ -28,6 +31,7 @@ const PartnerSection = () => {
             className="text-white bg-[#401A6D] px-8 py-3 md:px-10 md:py-4 
                        rounded-full text-sm md:text-base font-bold shadow-md 
                        transition-all duration-300 hover:bg-[#53228d] hover:scale-105"
+                       onClick={() => navigate("/welcome-partners")}
           >
             Partner With Us
           </button>
