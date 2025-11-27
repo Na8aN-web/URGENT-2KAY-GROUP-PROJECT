@@ -1,7 +1,12 @@
-import React from "react";
+import { useNavigate } from "react-router";
 import heroImage from "../assets/images/image.png";
 
 const HeroSection = () => {
+  const navigate = useNavigate();
+
+  const handleGetStarted = () => {
+    navigate("/sign-up");
+  };
   return (
     <div>
       {/* Text Section */}
@@ -21,6 +26,7 @@ const HeroSection = () => {
         <div className="flex flex-col sm:flex-row gap-4 mt-4 md:mt-10">
           {/* Get Started Button */}
           <button
+            onClick={handleGetStarted}
             className="text-white bg-[#401A6D] px-8 py-3 md:px-10 md:py-4 rounded-full text-sm font-bold 
                        hover:bg-[#53228d] transition-all duration-300 hover:scale-105"
           >

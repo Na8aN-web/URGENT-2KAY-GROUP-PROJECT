@@ -5,6 +5,7 @@ import avatar from "./images/avatar.png";
 import Button from "../../components/Button";
 import ButtonGold from "../../components/ButtonGold";
 import { useNavigate } from "react-router";
+import BackButton from "../../components/BackButton";
 
 const AddNewSponsor = ({ onClose, onAddSponsor }) => {
   const [name, setName] = useState("");
@@ -91,10 +92,7 @@ const BillDetails = () => {
 
   return (
     <div className="p-5 sm:p-6 lg:p-8 bg-[#ECE8F0] min-h-screen">
-      <div className="flex gap-1 items-center mb-6 md:mb-8">
-        <IoChevronBack />
-        <span className="text-xs font-medium text-[#6C6969]">back</span>
-      </div>
+      <BackButton />
 
       <h1 className="text-sm sm:text-base font-bold text-[#252323] pb-8">
         Bill Details
@@ -161,7 +159,7 @@ const BillDetails = () => {
               <span className="text-gray-500">{sp.relationship}</span> / {sp.name}
             </p>
 
-            <Button btnTxt="Choose" onClick={() => navigate("/dashboard/confirm-details")}/>
+            <Button btnTxt="Choose" onClick={() => navigate("/dashboard/confirm-details")} />
           </div>
         ))}
 

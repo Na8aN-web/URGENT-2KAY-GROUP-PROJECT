@@ -1,6 +1,12 @@
 import Image4 from "../assets/images/image4.png";
+import { useNavigate } from "react-router";
 
 const GetStarted = () => {
+  const navigate = useNavigate();
+
+  const handleGetStarted = () => {
+    navigate("/sign-up");
+  };
   return (
     <section className="lg:w-[82%] mx-auto px-6 py-20 bg-[#ECE8F0]">
       <div className="flex flex-col md:flex-row md:gap-10 md:items-stretch">
@@ -16,6 +22,7 @@ const GetStarted = () => {
           </p>
 
           <button
+            onClick={handleGetStarted}
             className="text-white bg-[#401A6D] px-8 py-3 md:px-10 md:py-4 
                        font-bold rounded-full text-sm md:text-base shadow-md
                        transition-all duration-300 

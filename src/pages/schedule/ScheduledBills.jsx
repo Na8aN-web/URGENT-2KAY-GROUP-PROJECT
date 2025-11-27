@@ -2,15 +2,13 @@ import React from "react";
 import { IoChevronBack } from "react-icons/io5";
 import Button from "../../components/Button";
 import ButtonGold from "../../components/ButtonGold";
+import BackButton from "../../components/BackButton";
 
 const ScheduledBills = () => {
 
   return (
     <div className="p-4 sm:p-6 lg:p-8 bg-[#ECE8F0] min-h-screen">
-      <div className="flex gap-1 items-center mb-6 md:mb-8">
-        <IoChevronBack />
-        <span className="text-xs font-medium text-[#6C6969]">back</span>
-      </div>
+      <BackButton />
       <h1 className="text-sm sm:text-base font-bold text-[#252323] pb-8">
         Scheduled Bills
       </h1>

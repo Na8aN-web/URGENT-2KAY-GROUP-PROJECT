@@ -8,7 +8,7 @@ const Congratulations = ({ isOpen, onGetStarted }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 bg-black/70 bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white max-w-[450px] px-4 md:px-16 py-8 rounded-lg shadow-lg text-center">
         <h1 className="text-xl font-bold mb-4">Welcome to Urgent 2Kay, Ada</h1>
         <p className="text-sm text-gray-600 mb-4">

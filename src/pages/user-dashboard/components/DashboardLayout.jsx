@@ -11,6 +11,7 @@ export default function DashboardLayout() {
 
     const handleLogout = () => {
         console.log('Logging out...');
+        navigate('/login');
     };
 
     const toggleSidebar = () => {
@@ -395,7 +396,7 @@ export default function DashboardLayout() {
                             </div>
 
                             <button
-                                onClick={() => navigate('/profile')}
+                                onClick={() => navigate('/dashboard/user-profile')}
                                 className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
                             >
                                 <User className="w-5 h-5 sm:w-6 sm:h-6 text-black" />

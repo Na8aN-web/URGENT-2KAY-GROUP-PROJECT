@@ -46,6 +46,7 @@ export default function UserDashboard() {
               bgColor="bg-gradient-to-br from-purple-700 to-purple-900"
               textColor="text-white"
               buttonText="Get Started"
+              route="/dashboard/services"
             />
           </div>
 
@@ -57,6 +58,7 @@ export default function UserDashboard() {
               bgColor="bg-gradient-to-br from-purple-700 to-purple-900"
               textColor="text-white"
               buttonText="Get Started"
+              route="/dashboard/generate-request"
             />
             <ActionCard
               title="Sponsor A Bundle"
@@ -65,6 +67,7 @@ export default function UserDashboard() {
               bgColor="bg-gradient-to-br from-green-800 to-green-950"
               textColor="text-white"
               buttonText="Get Started"
+              route="/dashboard/generate-request"
             />
             <ActionCard
               title="Schedule A Bundle"
@@ -73,6 +76,7 @@ export default function UserDashboard() {
               bgColor="bg-gradient-to-br from-teal-600 to-teal-800"
               textColor="text-white"
               buttonText="Get Started"
+              route="/dashboard/schedule-bill"
             />
             <ActionCard
               title="Create A Relationship"
@@ -81,6 +85,7 @@ export default function UserDashboard() {
               bgColor="bg-gradient-to-br from-blue-700 to-blue-900"
               textColor="text-white"
               buttonText="Get Started"
+              route="/dashboard/relationships"
             />
           </div>
         </div>
