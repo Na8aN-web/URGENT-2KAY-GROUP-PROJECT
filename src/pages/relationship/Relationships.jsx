@@ -11,19 +11,25 @@ const Relationship = () => {
   };
 
   return (
-    <div className="p-6 lg:p-8 bg-[#ECE8F0] min-h-screen">
-      <div className="flex flex-col items-center justify-center pt-16 sm:pt-22">
-        <img src={people} alt="people.png" className="h-56 w-56 md:h-56 md:w-56" />
+    <div className="p-6 lg:p-8 bg-[#ECE8F0] min-h-screen flex flex-col items-center justify-center text-center">
+      <img
+        src={people}
+        alt="people.png"
+        className="h-56 w-56 md:h-56 md:w-56"
+      />
 
-        <span className="text-[#545050] text-base sm:text-lg font-bold pt-8">
-          Oops!
-        </span>
-        <p className="pb-4 text-[#545050] text-base sm:text-lg font-bold text-center">
-          It Seems Like you Haven't Created Any Relationship Yet
-        </p>
+      <span className="text-[#545050] text-sm sm:text-lg font-bold pt-8 pb-1">
+        Oops!
+      </span>
+      <p className="pb-4 text-[#545050] text-sm sm:text-lg font-normal">
+        It Seems Like you Haven't Created Any Relationship Yet
+      </p>
 
-        <Button btnTxt="Create a relationship" onClick={handleCreate} className="sm:px-16"/>
-      </div>
+      <Button
+        btnTxt="Create a relationship"
+        onClick={handleCreate}
+        className="px-8 sm:px-16"
+      />
     </div>
   );
 };

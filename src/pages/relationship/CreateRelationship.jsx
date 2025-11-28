@@ -18,8 +18,8 @@ const CreateRelationship = () => {
 
   return (
     <>
-      <section className="px-8 py-2 lg:py-8 sm:px-28 lg:px-18 lg:pt-20 lg:max-w-5xl lg:mx-auto">
-        <h2 className="text-2xl font-bold text-[#401A6D] pb-12 text-center md:text-start">
+      <section className="p-8 sm:px-28 sm:py-12 lg:px-18 lg:pt-20 lg:max-w-5xl lg:mx-auto">
+        <h2 className="text-2xl font-bold text-[#331122] pb-12 text-center md:text-start">
           Create a Relationship
         </h2>
         {/* Create relationship */}
