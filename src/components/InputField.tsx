@@ -23,7 +23,7 @@ const InputField = ({
         readOnly={readOnly}
         required={required}
         type="text"
-        className={`border border-[#DBDDE0] w-full bg-white rounded-sm px-4 py-2 text-sm text-[#A8A8A8] ${className}`}
+        className={`border border-[#DBDDE0] w-full bg-white rounded-sm px-4 py-2 text-sm text-[#000000] ${className}`}
       />
       <span className="text-xs text-[#525252] font-normal">{inputSpan}</span>
     </div>

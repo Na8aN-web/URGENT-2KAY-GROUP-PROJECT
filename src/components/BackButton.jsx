@@ -7,7 +7,7 @@ const BackButton = () => {
   return (
     <div
       onClick={() => navigate(-1)}
-      className="flex items-center gap-1 cursor-pointer"
+      className="flex items-center gap-1 cursor-pointer pb-4"
     >
       <IoIosArrowBack className="w-5 h-5" />
       <span className="text-base">Back</span>

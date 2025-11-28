@@ -169,13 +169,6 @@ const BillDetails = () => {
         />
       </div>
 
-      {/* Schedule button */}
-      {/* <div className="pt-10">
-        <ButtonGold
-          btnTxt="Schedule Bill"
-          onClick={handleScheduleBill}
-        />
-      </div> */}
 
       {/* Add sponsor modal */}
       {showModal && (

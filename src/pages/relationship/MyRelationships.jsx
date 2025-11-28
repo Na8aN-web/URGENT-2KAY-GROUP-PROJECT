@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import avatar from "./img/avatar.png";
 import Button from "../../components/Button";
 import { CiMenuKebab } from "react-icons/ci";
-import { MdCancel } from "react-icons/md";
+import { IoMdClose } from "react-icons/io";
 import RelationshipModal from "./components/RelationshipModal";
 import { useNavigate } from "react-router";
 import BackButton from "../../components/BackButton";
@@ -56,22 +56,22 @@ const MyRelationships = () => {
       </h1>
 
       <div className="relative flex items-center justify-between border border-[#E8BF31] rounded-2xl p-3 sm:p-4 md:p-5 md:max-w-[60%] lg:max-w-[50%]">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <img src={avatar} alt="" className="h-[65px] w-[65px]" />
           <div>
             <p className="text-xs font-bold">Mrs Kamasi</p>
             <span className="text-xs font-bold">Mother</span>
           </div>
         </div>
-        <div className="flex items-center gap-4">
+        <div className=" flex items-center gap-4">
           <button
-            className="bg-[#401C6D] w-fit h-fit py-2 px-3 rounded-full text-white font-bold text-xs"
+            className="bg-[#401C6D] w-fit h-fit py-2 px-4 rounded-full text-white font-bold text-xs"
             onClick={() => navigate("/dashboard/sponsor-profile")}
           >
             View
           </button>
           <button
-            className="text-[#401C6D] w-fit h-fit py-2 px-3 rounded-full bg-white font-bold text-sm border border-[#E8BF31]"
+            className="text-[#401C6D] w-fit h-fit py-2 px-4 rounded-full bg-white font-bold text-xs border border-[#E8BF31]"
             onClick={() => navigate("/dashboard/edit-sponsor-profile")}
           >
             Edit
@@ -88,7 +88,7 @@ const MyRelationships = () => {
               onClick={() => setShowOptionsMenu(false)}
               className="absolute top-3 right-3 z-50"
             >
-              <MdCancel className="h-8 w-8 text-purple-900 cursor-pointer" />
+              <IoMdClose className="h-8 w-8 text-white cursor-pointer" />
             </button>
             <ul className="text-center bg-white rounded-xl text-sm">
               <li
@@ -156,6 +156,7 @@ const MyRelationships = () => {
           <RelationshipModal
             action={modalAction}
             onClick={() => setShowRemoveSponsor(false)}
+            img={trash}
             title="Sponsor Profile Deleted."
             message="Mrs. Kamal is no longer linked to your account."
             btnTxt="Done"

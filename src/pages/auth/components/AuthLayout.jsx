@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router";
+import "./AuthLayout.css";
 
 const AuthLayout = ({
   children,
@@ -11,9 +12,9 @@ const AuthLayout = ({
 }) => {
   return (
     <div className="bg-[#f0edf3] md:flex w-full min-h-screen">
-      <section className="hidden bg-purple-950 md:flex md:justify-center md:items-center md:flex-1 px-6">
+      <section className="desktop-hero hidden bg-purple-950 md:flex md:justify-center md:items-center md:flex-1 px-6">
         {/* Desktop hero */}
-        <div className="bg-white/30 backdrop-blur-xl border border-white/20 max-w-lg h-[70%] px-[5%] py-[8%] flex flex-col justify-between rounded-3xl">
+        <div className="bg-white/20 backdrop-blur-xl border border-white/20 max-w-lg h-[70%] px-[5%] py-[8%] flex flex-col justify-between rounded-3xl">
           <div className="space-y-2">
             <h1 className="text-2xl text-[#D5CECE] font-normal">
               Welcome to
