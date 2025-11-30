@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import happy from "../../assets/images/happy.png";
 
-const BundleSuccessPage = ({ bundleName = "Your Custom Bundle" }) => {
+const BundleSuccessPage = () => {
   const navigate = useNavigate();
 
   return (
@@ -20,7 +20,7 @@ const BundleSuccessPage = ({ bundleName = "Your Custom Bundle" }) => {
       </h1>
 
       <p className="text-sm text-gray-500 mb-10 max-w-md leading-relaxed">
-        {bundleName} is ready, and you're one step closer to simplifying your
+        Your bundle is ready, and you're one step closer to simplifying your
         finances.
       </p>
 

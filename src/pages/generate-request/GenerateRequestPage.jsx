@@ -84,16 +84,20 @@ const GenerateRequestPage = () => {
                     />
                 </div>
 
+               <div onClick={() => navigate('/dashboard/services')} className="cursor-pointer">
                 <SuggestionCard 
                     title="Get ₦500 Free Credits! Complete your first bundle and get ₦500 free credits." 
                     buttonText="Create request now" 
                     type="gift"
                 />
+                </div>
+                 <div onClick={() => navigate('/dashboard/pay/Electricity')} className="cursor-pointer">
                 <SuggestionCard 
                     title="Pay Bills, Get 10% cashback on all utility bills. Offer ends soon!" 
                     buttonText="View Offer" 
                     type="gift"
                 />
+                </div>
             </div>
 
         </div>
