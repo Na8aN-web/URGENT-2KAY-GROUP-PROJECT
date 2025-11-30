@@ -64,7 +64,7 @@ const SponsorRequestReviewPage = () => {
   const onConfirmReject = () => {
     setShowRejectModal(false);
     {/* navigate back to the sponsor dashboard page */} 
-    navigate("/dashboard/sponsor-view");
+    navigate("/dashboard/sponsor/inbox");
   };
 
   const onCancelModal = () => {
@@ -75,7 +75,7 @@ const SponsorRequestReviewPage = () => {
 
   {/* back button */}
   const handleBackClick = () => {
-    navigate("/dashboard/sponsor/inbox");
+    navigate("/dashboard/generate-request");
   };
 
   return (

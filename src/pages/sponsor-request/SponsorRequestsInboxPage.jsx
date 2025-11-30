@@ -114,7 +114,7 @@ const SponsorRequestsInboxPage = () => {
   };
 
   const handleBackClick = () => {
-    navigate("/dashboard/sponsor-view");
+    navigate("/dashboard/generate-request");
   };
 
   const hasRequests = Object.values(MOCK_REQUESTS).flat().length > 0;

@@ -6,7 +6,7 @@ const TransactionSuccessPage = () => {
   const navigate = useNavigate();
 
   const handleGoBack = () => {
-    navigate("/dashboard/sponsor-view");
+    navigate("/dashboard/generate-request");
   };
 
   // mock data

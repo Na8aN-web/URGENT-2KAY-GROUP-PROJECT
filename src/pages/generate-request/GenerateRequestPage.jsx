@@ -20,7 +20,7 @@ const GenerateRequestPage = () => {
     };
     
     const handleSponsorReview = () => {
-        navigate('/dashboard/sponsor-view'); 
+        navigate('/dashboard/sponsor/inbox'); 
     };
 
 
