@@ -48,13 +48,13 @@ export default function UserProfile() {
   const menuItems = [
     { icon: User, text: "View Profile", onClick: () => navigate("/dashboard/my-profile") },
     { icon: FileText, text: "Statement & Profile" },
-    { icon: CreditCard, text: "Saved Cards" },
-    { icon: HelpCircle, text: "Get Help" },
+    { icon: CreditCard, text: "Saved Cards", onClick: () => navigate("/dashboard/payment-methods") },
+    { icon: HelpCircle, text: "Get Help", onClick: () => navigate("/dashboard/help") },
     { icon: Link, text: "Linked Accounts" },
     { icon: Ban, text: "Account Limit" },
     { icon: Lock, text: "Security" },
     { icon: FileCheck, text: "Legal" },
-    { icon: Phone, text: "FAQs" },
+    { icon: Phone, text: "FAQs", onClick: () => navigate("/dashboard/faq") },
     { icon: Phone, text: "Contact Us" },
   ];
 

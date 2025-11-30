@@ -30,6 +30,13 @@ export default function DashboardLayout() {
         navigate('/dashboard/notifications');
     };
 
+            const currentUserName = location.pathname.includes('/sponsor-view') || location.pathname.includes('/sponsor/inbox') || location.pathname.includes('/sponsor/review/REQ1001') || location.pathname.includes('/dashboard/success') ? 'Ngozi' : 'Ada';
+
+
+            const handleConnectWallet = () =>{
+                navigate('/dashboard/sponsor/fund/REQ1001')
+            }
+
     // Close notification when clicking outside
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -252,7 +259,7 @@ export default function DashboardLayout() {
                             </button>
 
                             <div className="hidden sm:block">
-                                <h1 className="text-base lg:text-lg font-bold text-gray-900">Hi, Ada</h1>
+                                <h1 className="text-base lg:text-lg font-bold text-gray-900">Hi, {currentUserName}</h1>
                                 <p className="text-xs text-gray-500">Let's simplify your finances!</p>
                             </div>
 
@@ -267,7 +274,7 @@ export default function DashboardLayout() {
                         </div>
 
                         <div className="flex items-center gap-2 sm:gap-4">
-                            <button className="hidden sm:block px-4 lg:px-6 py-2 bg-[#401A6D] text-white rounded-[58px] font-semibold hover:bg-purple-800 text-xs lg:text-sm transition-colors">
+                            <button onClick={handleConnectWallet} className="hidden sm:block px-4 lg:px-6 py-2 bg-[#401A6D] text-white rounded-[58px] font-semibold hover:bg-purple-800 text-xs lg:text-sm transition-colors">
                                 Connect Wallet
                             </button>
 

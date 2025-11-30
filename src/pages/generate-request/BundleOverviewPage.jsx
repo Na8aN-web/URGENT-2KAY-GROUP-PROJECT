@@ -77,12 +77,6 @@ const BundleOverviewPage = () => {
               src={sponsor.imageUrl}
               alt={sponsor.name}
               className="w-10 h-10 rounded-full object-cover mr-4"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = `https://placehold.co/40x40/333333/ffffff?text=${sponsor.name.charAt(
-                  0
-                )}`;
-              }}
             />
             <div>
               <p className="font-semibold text-gray-900">{sponsor.name}</p>

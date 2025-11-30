@@ -5,13 +5,13 @@ import TransactionHistory from "./pages/user-dashboard/TransactionHistory.jsx";
 import SignUp from "./pages/auth/SignUp";
 import VerifyEmail from "./pages/auth/VerifyEmail";
 import Login from "./pages/auth/Login";
-import UserProfile from './pages/user-dashboard/UserProfile.jsx'
+import UserProfile from "./pages/user-dashboard/UserProfile.jsx";
 import MyProfile from "./pages/user-dashboard/MyProfile.jsx";
 import Help from "./pages/user-dashboard/Help.jsx";
 import FAQ from "./pages/user-dashboard/FAQ.jsx";
 import ServiceProvider from "./pages/user-dashboard/ServiceProvider.jsx";
 import SubmitRequest from "./pages/user-dashboard/SubmitRequest.jsx";
-import Notifications from './pages/user-dashboard/Notifications.jsx'
+import Notifications from "./pages/user-dashboard/Notifications.jsx";
 import LandingPage from "./pages/LandingPage";
 import ScheduleBill from "./pages/schedule/ScheduleBill";
 import ScheduleBills from "./pages/schedule/ScheduledBills";
@@ -38,7 +38,13 @@ import RequestSentFinalPage from "./pages/generate-request/RequestSentFinalPage.
 import ShoppingPaymentPage from "./pages/generate-request/ShoppingPaymentPage.jsx";
 import ShoppingOrderEntryPage from "./pages/generate-request/ShoppingOrderEntryPage.jsx";
 import ItemsAddedPage from "./pages/generate-request/ItemAddedPage.jsx";
-
+import SponsorDashboardPage from "./pages/sponsor-request/SponsorDashboardPage.jsx";
+import SponsorRequestReviewPage from "./pages/sponsor-request/SponsorRequestReviewPage.jsx";
+import SponsorRequestsInboxPage from "./pages/sponsor-request/SponsorRequestsInboxPage.jsx";
+import SponsorFundingPage from "./pages/sponsor-request/SponsorFundingPage.jsx";
+import PaymentMethodsPage from "./pages/sponsor-request/PaymentMethodsPage.jsx";
+import FinalCheckoutPage from "./pages/sponsor-request/FinalCheckoutPage.jsx";
+import TransactionSuccessPage from "./pages/sponsor-request/TransactionSuccessPage.jsx";
 
 function App() {
   return (
@@ -49,10 +55,7 @@ function App() {
         <Route index element={<Dashboard />} />
         {/* Generate Request routes */}
         <Route path="generate-request" element={<GenerateRequestPage />} />
-        <Route
-          path="bundle-overview/:sponsorId"
-          element={<BundleOverviewPage />}
-        />
+        <Route path="bundle-overview/:sponsorId" element={<BundleOverviewPage />} />
         <Route path="services" element={<AllServicesPage />} />
         <Route path="pay/:serviceType" element={<ServicePaymentPage />} />
         <Route path="referral" element={<ReferralPage />} />
@@ -62,10 +65,7 @@ function App() {
         <Route path="request-sent-final" element={<RequestSentFinalPage />} />
         <Route path="pay/Shop Online" element={<ShoppingPaymentPage />} />
         <Route path="pay/Shop Online" element={<ShoppingPaymentPage />} />
-        <Route
-          path="pay/order-entry/:vendorName"
-          element={<ShoppingOrderEntryPage />}
-        />{" "}
+        <Route path="pay/order-entry/:vendorName" element={<ShoppingOrderEntryPage />} />
         <Route path="item-added" element={<ItemsAddedPage />} />
         <Route
           path="under-construction/:serviceName"
@@ -75,6 +75,17 @@ function App() {
             </div>
           }
         />
+
+        {/* sponsor request routes */}
+        <Route path="sponsor/inbox" element={<SponsorRequestsInboxPage />} />
+        <Route path="sponsor/review/:requestId" element={<SponsorRequestReviewPage />} />
+        <Route path="sponsor-view" element={<SponsorDashboardPage />} />
+        <Route path="sponsor/fund/:requestId" element={<SponsorFundingPage />} />
+        <Route path="payment-methods" element={<PaymentMethodsPage />} />
+        <Route path="checkout" element={<FinalCheckoutPage />} />
+        <Route path="success" element={<TransactionSuccessPage />} />
+
+
         <Route path="transaction-history" element={<TransactionHistory />} />
         <Route path="schedule-bill" element={<ScheduleBill />} />
         <Route path="schedule-bills" element={<ScheduleBills />} />

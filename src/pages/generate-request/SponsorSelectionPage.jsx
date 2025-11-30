@@ -26,12 +26,6 @@ const SponsorCard = ({ sponsor, selected, onSelect }) => (
       src={sponsor.imageUrl}
       alt={sponsor.name}
       className="w-12 h-12 rounded-full object-cover mr-4"
-      onError={(e) => {
-        e.target.onerror = null;
-        e.target.src = `https://placehold.co/50x50/333333/ffffff?text=${sponsor.name.charAt(
-          0
-        )}`;
-      }}
     />
     <div className="flex-1">
       <p className="font-bold text-lg text-gray-900">{sponsor.name}</p>

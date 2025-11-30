@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Share2, Zap, Award, ArrowLeft } from "lucide-react";
 
-const ReferralStep = ({ icon: Icon, title, reward }) => (
+const ReferralStep = ({icon:Icon, title, reward }) => (
   <div className="flex flex-col items-center text-center p-4">
     <div className="w-20 h-20 mb-3 bg-purple-50 rounded-full flex items-center justify-center border-2 border-purple-200">
       <Icon className="w-8 h-8 text-[#401A6D]" />
