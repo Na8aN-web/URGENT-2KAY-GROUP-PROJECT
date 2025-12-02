@@ -19,7 +19,7 @@ const CreateRelationship = () => {
   return (
     <>
       <section className="p-8 sm:px-28 sm:py-12 lg:px-18 lg:pt-20 lg:max-w-5xl lg:mx-auto">
-        <h2 className="text-2xl font-bold text-[#331122] pb-12 text-center md:text-start">
+        <h2 className="text-2xl font-bold text-[#331122] pb-12 text-center">
           Create a Relationship
         </h2>
         {/* Create relationship */}
@@ -31,7 +31,7 @@ const CreateRelationship = () => {
               className="w-[65px] h-[65px] md:w-[107px] md:h-[107px]"
             />
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-30 gap-y-6 xl:gap-x-60 pb-16 sm:pb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-30 gap-y-4 xl:gap-x-60 pb-16 sm:pb-12">
             <InputField
               inputLabel="Sponsor's Full Name"
               placeholder="Mrs. Kamisi"
@@ -64,6 +64,7 @@ const CreateRelationship = () => {
               btnTxt="Save Changes"
               type="button"
               onClick={() => setShowModal(true)}
+              className="px-8 sm:px-16 md:px-18"
             />
           </div>
         </form>

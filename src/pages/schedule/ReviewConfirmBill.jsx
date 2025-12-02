@@ -11,11 +11,11 @@ const ReviewConfirmBill = () => {
   return (
     <div className="p-5 sm:p-6 lg:p-8 bg-[#ECE8F0] min-h-screen">
       <BackButton />
-      <h1 className="text-sm sm:text-base font-bold text-[#252323] pb-8">
+      <h1 className="text-base md:text-lg font-bold text-[#252323] pb-8">
         Review and Confirm
       </h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-x-20 md:gap-y-8 lg:w-[80%] xl:w-[60%]">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-x-20 md:gap-y-8 lg:w-[80%] xl:w-[60%]">
         <InputField inputLabel="Bill Type" />
 
         <InputField inputLabel="Service Provider" />

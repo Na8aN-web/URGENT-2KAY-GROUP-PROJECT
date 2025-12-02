@@ -15,7 +15,7 @@ const ScheduleBill = () => {
   return (
     <div className="p-5 sm:p-6 lg:p-8 bg-[#ECE8F0] min-h-screen flex flex-col">
       <BackButton />
-      <h1 className="text-sm sm:text-base font-bold text-[#252323]">
+      <h1 className="text-base md:text-lg font-bold text-[#252323]">
         Scheduled Bills
       </h1>
 
@@ -25,15 +25,15 @@ const ScheduleBill = () => {
         <p className="pb-3 pt-4 text-[#545050] text-base sm:text-lg font-bold">
           Nothing scheduled yet.
         </p>
-        <span className="text-[#535151] text-sm font-normal pb-1">
+        <span className="text-[#535151] text-base font-normal pb-1">
           Schedule your bills now and let your sponsors know what's coming rent,
           tuition, or essentials.
         </span>
-        <span className="text-[#535151] text-sm font-normal pb-4">
+        <span className="text-[#535151] text-base font-normal pb-6">
           No surprises, no pressure-just smarter support.
         </span>
 
-        <Button btnTxt="Schedule bill" onClick={handleScheduleBill} className="px-8 sm:px-16"/>
+        <Button btnTxt="Schedule bill" onClick={handleScheduleBill}  className="px-12 sm:px-16 md:px-18"/>
       </div>
     </div>
   );

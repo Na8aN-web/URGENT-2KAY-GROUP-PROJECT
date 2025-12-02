@@ -9,7 +9,7 @@ const ScheduledBills = () => {
   return (
     <div className="p-4 sm:p-6 lg:p-8 bg-[#ECE8F0] min-h-screen">
       <BackButton />
-      <h1 className="text-sm sm:text-base font-bold text-[#252323] pb-8">
+      <h1 className="text-lg font-bold text-[#252323] pb-8">
         Scheduled Bills
       </h1>
 

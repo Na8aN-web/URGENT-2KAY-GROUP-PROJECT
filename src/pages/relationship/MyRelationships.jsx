@@ -51,7 +51,7 @@ const MyRelationships = () => {
     <section className="p-5 sm:py-5 sm:px-12">
       <BackButton />
 
-      <h1 className="text-center text-xl font-bold text-[#331122] py-8 sm:text-left sm:py-10">
+      <h1 className="text-center text-2xl font-bold text-[#331122] py-8 sm:text-left sm:py-10">
         My Relationships
       </h1>
 
@@ -59,8 +59,8 @@ const MyRelationships = () => {
         <div className="flex items-center gap-3">
           <img src={avatar} alt="" className="h-[65px] w-[65px]" />
           <div>
-            <p className="text-xs font-bold">Mrs Kamasi</p>
-            <span className="text-xs font-bold">Mother</span>
+            <p className="text-xs sm:text-sm font-bold">Mrs Kamasi</p>
+            <span className="text-xs sm:text-sm font-bold">Mother</span>
           </div>
         </div>
         <div className=" flex items-center gap-4">

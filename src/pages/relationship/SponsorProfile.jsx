@@ -33,7 +33,7 @@ const SponsorProfile = () => {
   return (
     <section className="px-6 pt-6 pb-20 sm:p-8 md:px-10">
       <BackButton />
-      <h1 className="text-xl font-bold text-[#331122] pt-8 pb-4 sm:text-left">
+      <h1 className="text-2xl font-bold text-[#331122] pt-2 pb-4 sm:text-left">
         Sponsor Profile
       </h1>
 

@@ -68,13 +68,13 @@ const PaymentDetails = () => {
     <div className="p-6 md:p-8">
       <BackButton />
 
-      <h1 className="text-xl font-bold text-[#331122] pt-8 sm:text-left sm:py-6">
+      <h1 className="text-2xl font-bold text-[#331122] pt-8 sm:text-left sm:py-6">
         Payment Details
       </h1>
 
       {/* Sponsor */}
       <div>
-        <h2 className="text-lg font-bold text-[#6D6969] py-2 sm:text-left">
+        <h2 className="text-lg font-bold text-[#6D6969] py-3 sm:py-2 sm:text-left">
           Sponsor
         </h2>
         <div className="relative flex flex-col md:flex-row justify-between p-3 sm:p-4 md:p-5">

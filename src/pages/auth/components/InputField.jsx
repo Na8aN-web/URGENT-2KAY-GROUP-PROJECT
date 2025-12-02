@@ -15,7 +15,7 @@ return (
   <div>
     <div className="flex flex-col w-full space-y-1">
       {label && (
-        <label className="text-sm font-medium text-gray-700 pb-1">
+        <label className="text-base font-medium text-gray-700 pb-1">
           {label}
         </label>
       )}
@@ -27,7 +27,7 @@ return (
           value={value}
           onChange={onChange}
           onFocus={onFocus}
-          className={`w-full py-3 px-4 border-2 rounded-full text-sm ${
+          className={`w-full py-3 px-4 border-2 rounded-full text-base ${
             error ? 'border-red-300' : 'border-gray-200'
           }`}
           {...rest}
