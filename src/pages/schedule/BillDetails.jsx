@@ -36,7 +36,7 @@ const AddNewSponsor = ({ onClose, onAddSponsor }) => {
       </button>
 
       <form
-        className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-x-20 md:gap-y-8"
+        className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-x-20 md:gap-y-6"
         onSubmit={handleAdd}
       >
         <InputField
@@ -94,12 +94,12 @@ const BillDetails = () => {
     <div className="p-5 sm:p-6 lg:p-8 bg-[#ECE8F0] min-h-screen">
       <BackButton />
 
-      <h1 className="text-sm sm:text-base font-bold text-[#252323] pb-8">
+      <h1 className="text-base md:text-lg font-bold text-[#252323] pb-8">
         Bill Details
       </h1>
 
       {/* Bill inputs */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-x-20 md:gap-y-8 lg:w-[80%] xl:w-[60%]">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-x-20 md:gap-y-6 lg:w-[80%] xl:w-[60%]">
         <InputField
           inputLabel="Bill Type"
           inputSpan="E.g Rent, Tuition"

@@ -18,17 +18,17 @@ const Relationship = () => {
         className="h-56 w-56 md:h-56 md:w-56"
       />
 
-      <span className="text-[#545050] text-sm sm:text-lg font-bold pt-8 pb-1">
+      <span className="text-[#545050] text-base sm:text-lg font-bold pt-8 pb-1">
         Oops!
       </span>
-      <p className="pb-4 text-[#545050] text-sm sm:text-lg font-normal">
+      <p className="pb-4 text-[#545050] text-base sm:text-lg font-normal">
         It Seems Like you Haven't Created Any Relationship Yet
       </p>
 
       <Button
         btnTxt="Create a relationship"
         onClick={handleCreate}
-        className="px-8 sm:px-16"
+        className="px-8 sm:px-16 md:px-20"
       />
     </div>
   );
