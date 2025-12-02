@@ -45,76 +45,90 @@ import SponsorFundingPage from "./pages/sponsor-request/SponsorFundingPage.jsx";
 import PaymentMethodsPage from "./pages/sponsor-request/PaymentMethodsPage.jsx";
 import FinalCheckoutPage from "./pages/sponsor-request/FinalCheckoutPage.jsx";
 import TransactionSuccessPage from "./pages/sponsor-request/TransactionSuccessPage.jsx";
+import { UserProvider } from "./contexts/UserProvider.jsx";
 
 function App() {
   return (
-    <Routes>
-      {/* Landing Page route */}
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/dashboard" element={<DashboardLayout />}>
-        <Route index element={<Dashboard />} />
-        {/* Generate Request routes */}
-        <Route path="generate-request" element={<GenerateRequestPage />} />
-        <Route path="bundle-overview/:sponsorId" element={<BundleOverviewPage />} />
-        <Route path="services" element={<AllServicesPage />} />
-        <Route path="pay/:serviceType" element={<ServicePaymentPage />} />
-        <Route path="referral" element={<ReferralPage />} />
-        <Route path="bundle-success" element={<BundleSuccessPage />} />
-        <Route path="sponsor-select" element={<SponsorSelectionPage />} />
-        <Route path="add-sponsor" element={<AddNewSponsorPage />} />
-        <Route path="request-sent-final" element={<RequestSentFinalPage />} />
-        <Route path="pay/Shop Online" element={<ShoppingPaymentPage />} />
-        <Route path="pay/Shop Online" element={<ShoppingPaymentPage />} />
-        <Route path="pay/order-entry/:vendorName" element={<ShoppingOrderEntryPage />} />
-        <Route path="item-added" element={<ItemsAddedPage />} />
-        <Route
-          path="under-construction/:serviceName"
-          element={
-            <div className="flex justify-center items-center p-30 text-3xl font-bold">
-              Under Construction, check back later!
-            </div>
-          }
-        />
+    <UserProvider>
+      <Routes>
+        {/* Landing Page route */}
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/dashboard" element={<DashboardLayout />}>
+          <Route index element={<Dashboard />} />
+          {/* Generate Request routes */}
+          <Route path="generate-request" element={<GenerateRequestPage />} />
+          <Route
+            path="bundle-overview/:sponsorId"
+            element={<BundleOverviewPage />}
+          />
+          <Route path="services" element={<AllServicesPage />} />
+          <Route path="pay/:serviceType" element={<ServicePaymentPage />} />
+          <Route path="referral" element={<ReferralPage />} />
+          <Route path="bundle-success" element={<BundleSuccessPage />} />
+          <Route path="sponsor-select" element={<SponsorSelectionPage />} />
+          <Route path="add-sponsor" element={<AddNewSponsorPage />} />
+          <Route path="request-sent-final" element={<RequestSentFinalPage />} />
+          <Route path="pay/Shop Online" element={<ShoppingPaymentPage />} />
+          <Route path="pay/Shop Online" element={<ShoppingPaymentPage />} />
+          <Route
+            path="pay/order-entry/:vendorName"
+            element={<ShoppingOrderEntryPage />}
+          />
+          <Route path="item-added" element={<ItemsAddedPage />} />
+          <Route
+            path="under-construction/:serviceName"
+            element={
+              <div className="flex justify-center items-center p-30 text-3xl font-bold">
+                Under Construction, check back later!
+              </div>
+            }
+          />
 
-        {/* sponsor request routes */}
-        <Route path="sponsor/inbox" element={<SponsorRequestsInboxPage />} />
-        <Route path="sponsor/review/:requestId" element={<SponsorRequestReviewPage />} />
-        <Route path="sponsor-view" element={<SponsorDashboardPage />} />
-        <Route path="sponsor/fund/:requestId" element={<SponsorFundingPage />} />
-        <Route path="payment-methods" element={<PaymentMethodsPage />} />
-        <Route path="checkout" element={<FinalCheckoutPage />} />
-        <Route path="success" element={<TransactionSuccessPage />} />
+          {/* sponsor request routes */}
+          <Route path="sponsor/inbox" element={<SponsorRequestsInboxPage />} />
+          <Route
+            path="sponsor/review/:requestId"
+            element={<SponsorRequestReviewPage />}
+          />
+          <Route path="sponsor-view" element={<SponsorDashboardPage />} />
+          <Route
+            path="sponsor/fund/:requestId"
+            element={<SponsorFundingPage />}
+          />
+          <Route path="payment-methods" element={<PaymentMethodsPage />} />
+          <Route path="checkout" element={<FinalCheckoutPage />} />
+          <Route path="success" element={<TransactionSuccessPage />} />
 
+          <Route path="transaction-history" element={<TransactionHistory />} />
+          <Route path="schedule-bill" element={<ScheduleBill />} />
+          <Route path="schedule-bills" element={<ScheduleBills />} />
+          <Route path="bill-details" element={<BillDetails />} />
+          <Route path="confirm-details" element={<ReviewConfirmBill />} />
+          <Route path="relationships" element={<Relationships />} />
+          <Route path="create-relationship" element={<CreateRelationship />} />
+          <Route path="my-relationships" element={<MyRelationships />} />
+          <Route path="payment-details" element={<PaymentDetails />} />
+          <Route path="edit-sponsor-profile" element={<EditSponsorProfile />} />
+          <Route path="sponsor-profile" element={<SponsorProfile />} />
+          <Route path="user-profile" element={<UserProfile />} />
+          <Route path="my-profile" element={<MyProfile />} />
+          <Route path="help" element={<Help />} />
+          <Route path="faq" element={<FAQ />} />
+          <Route path="service-provider" element={<ServiceProvider />} />
+          <Route path="submit-request" element={<SubmitRequest />} />
+          <Route path="notifications" element={<Notifications />} />
+        </Route>
 
-        <Route path="transaction-history" element={<TransactionHistory />} />
-        <Route path="schedule-bill" element={<ScheduleBill />} />
-        <Route path="schedule-bills" element={<ScheduleBills />} />
-        <Route path="bill-details" element={<BillDetails />} />
-        <Route path="confirm-details" element={<ReviewConfirmBill />} />
-        <Route path="relationships" element={<Relationships />} />
-        <Route path="create-relationship" element={<CreateRelationship />} />
-        <Route path="my-relationships" element={<MyRelationships />} />
-        <Route path="payment-details" element={<PaymentDetails />} />
-        <Route path="edit-sponsor-profile" element={<EditSponsorProfile />} />
-        <Route path="sponsor-profile" element={<SponsorProfile />} />
-        <Route path="user-profile" element={<UserProfile />} />
-        <Route path="my-profile" element={<MyProfile />} />
-        <Route path="help" element={<Help />} />
-        <Route path="faq" element={<FAQ />} />
-        <Route path="service-provider" element={<ServiceProvider />} />
-        <Route path="submit-request" element={<SubmitRequest />} />
-        <Route path="notifications" element={<Notifications />} />
-      </Route>
-
-      {/* Authentication */}
-      <Route path="/sign-up" element={<SignUp />} />
-      <Route path="/verify-email" element={<VerifyEmail />} />
-      <Route path="/login" element={<Login />} />
-      {/* Partners registration */}
-      <Route path="/welcome-partners" element={<WelcomePartners />} />
-      <Route path="/thank-you" element={<ThankYou />} />
-      <Route path="/get-started-partners" element={<GetStartedPartners />} />
-    </Routes>
+        {/* Authentication */}
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/verify-email" element={<VerifyEmail />} />
+        <Route path="/login" element={<Login />} />
+        {/* Partners registration */}
+        <Route path="/welcome-partners" element={<WelcomePartners />} />
+        <Route path="/thank-you" element={<ThankYou />} />
+        <Route path="/get-started-partners" element={<GetStartedPartners />} />
+      </Routes>
+    </UserProvider>
   );
 }
 

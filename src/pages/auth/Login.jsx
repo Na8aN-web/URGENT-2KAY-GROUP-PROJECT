@@ -3,14 +3,16 @@ import InputField from "./components/InputField";
 import AuthButton from "./components/AuthButton";
 import AuthLayout from "./components/AuthLayout";
 import { Link, useNavigate } from "react-router";
+import { useUser } from "../../hooks/useUser";
+import { validateEmail } from "../../utils/validation";
 
-const Congratulations = ({ isOpen, onGetStarted }) => {
+const Congratulations = ({ isOpen, onGetStarted, firstName }) => {
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-black/70 bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white max-w-[450px] px-4 md:px-16 py-8 rounded-lg shadow-lg text-center">
-        <h1 className="text-xl font-bold mb-4">Welcome to Urgent 2Kay, Ada</h1>
+      <h1 className="text-xl font-bold mb-4">Welcome to Urgent 2Kay, {firstName}!</h1>
         <p className="text-sm text-gray-600 mb-4">
           We're thrilled to have you on board. Create or Sponsor your first
           bundle to get started!
@@ -91,12 +93,54 @@ const Congratulations = ({ isOpen, onGetStarted }) => {
 
 const Login = () => {
   const navigate = useNavigate();
+  const { user, login } = useUser();
   const [showCongrats, setShowCongrats] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Show congratulations modal after successful login
-    setShowCongrats(true);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!validateEmail(formData.email)) {
+      newErrors.email = "Please enter a valid email address";
+    }
+
+    if (!formData.password) {
+      newErrors.password = "Password is required";
+    } else if (formData.password.length < 8) {
+      newErrors.password = "Password must be at least 8 characters";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = () => {
+    if (validateForm()) {
+      if (!user) {
+        login({
+          firstName: "Ada",
+          email: formData.email,
+        });
+      }
+      setShowCongrats(true);
+    }
   };
 
   const handleGetStarted = () => {
@@ -115,21 +159,28 @@ const Login = () => {
         to="/sign-up"
       >
         <h2 className="text-4xl pb-8 font-meduim">Login</h2>
-        <form action="" className="space-y-6" onSubmit={handleSubmit}>
+        <div className="space-y-6">
           <InputField
             label="Email address"
-            type="text"
+            type="email"
+            name="email"
             placeholder="Enter your email"
+            value={formData.email}
+            onChange={handleChange}
+            error={errors.email}
           />
-
           <InputField
             label="Password"
             type="password"
+            name="password"
             placeholder="Enter your password"
+            value={formData.password}
+            onChange={handleChange}
+            error={errors.password}
           />
 
-          <AuthButton btnTxt="Login" type="submit" />
-        </form>
+          <AuthButton btnTxt="Login" type="submit" onClick={handleSubmit} />
+        </div>
         <p className="text-sm text-center pt-2 text-[#525252]">
           Don't have an account?
           <Link to="/sign-up" className="text-[#401C6D] font-extrabold">
@@ -138,7 +189,11 @@ const Login = () => {
         </p>
       </AuthLayout>
 
-      <Congratulations isOpen={showCongrats} onGetStarted={handleGetStarted} />
+      <Congratulations
+        isOpen={showCongrats}
+        onGetStarted={handleGetStarted}
+        firstName={user?.firstName || "User"}
+      />
     </>
   );
 };

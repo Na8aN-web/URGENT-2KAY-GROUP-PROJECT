@@ -2,6 +2,7 @@ import React from "react";
 import { Camera, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router";
 
+
 export default function MyProfile() {
   const navigate = useNavigate();
 
