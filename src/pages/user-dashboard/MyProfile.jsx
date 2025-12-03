@@ -1,10 +1,12 @@
 import React from "react";
 import { Camera, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router";
+import { useUser } from "../../hooks/useUser";
 
 
 export default function MyProfile() {
   const navigate = useNavigate();
+  const {user} = useUser()
 
   return (
     <div className="min-h-screen bg-[#F7F6F9] pb-10">
@@ -25,7 +27,7 @@ export default function MyProfile() {
         {/* Username */}
         <div className="flex justify-between px-6 py-10 border-b border-[#828282CC]">
           <p className="text-gray-700">Username</p>
-          <p className="text-gray-900 font-medium">Adabekee5</p>
+          <p className="text-gray-900 font-medium">{user.firstName}</p>
         </div>
 
         {/* Display Photo */}
@@ -47,21 +49,21 @@ export default function MyProfile() {
         {/* Name */}
         <div className="flex justify-between px-6 py-10 border-b border-[#828282CC]">
           <p className="text-gray-700">Name</p>
-          <p className="text-gray-900 font-medium">Ada Okolie</p>
+          <p className="text-gray-900 font-medium">{`${user.firstName} ${user.lastName}`}</p>
         </div>
 
         {/* Email */}
         <div className="flex justify-between px-6 py-10 border-b border-[#828282CC]">
           <p className="text-gray-700">Email</p>
           <p className="text-gray-900 font-medium">
-            adaokolie@gmail.com
+           {user.email}
           </p>
         </div>
 
         {/* Phone */}
         <div className="flex justify-between px-6 py-10 border-b border-[#828282CC]">
           <p className="text-gray-700">Phone number</p>
-          <p className="text-gray-900 font-medium">09035041950</p>
+          <p className="text-gray-900 font-medium">{user.phone}</p>
         </div>
 
         {/* Edit Button */}

@@ -1,94 +1,99 @@
 import React, { useState } from "react";
-import { IoChevronBack } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 import InputField from "../../components/InputField";
-import avatar from "./images/avatar.png";
+import { RxAvatar } from "react-icons/rx";
 import Button from "../../components/Button";
 import ButtonGold from "../../components/ButtonGold";
-import { useNavigate } from "react-router";
 import BackButton from "../../components/BackButton";
-
-const AddNewSponsor = ({ onClose, onAddSponsor }) => {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [relationship, setRelationship] = useState("");
-
-  const handleAdd = (e) => {
-    e.preventDefault();
-
-    const newSponsor = {
-      id: Date.now(),
-      name,
-      phone,
-      relationship,
-    };
-
-    onAddSponsor(newSponsor);
-    onClose();
-  };
-
-  return (
-    <div className="relative w-full max-w-[600px] bg-white py-10 px-4 md:py-20 md:px-8 rounded-lg">
-      <button
-        onClick={onClose}
-        className="absolute top-3 right-3 text-gray-600 text-xl font-bold"
-      >
-        ✕
-      </button>
-
-      <form
-        className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-x-20 md:gap-y-6"
-        onSubmit={handleAdd}
-      >
-        <InputField
-          inputLabel="Sponsor Full Name"
-          placeholder="Enter name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-
-        <InputField
-          inputLabel="Sponsor Phone Number"
-          placeholder="Enter phone number"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-        />
-
-        <InputField inputLabel="Email Address" placeholder="Enter email" />
-
-        <InputField
-          inputLabel="Relationship Type"
-          placeholder="Mother"
-          inputSpan="e.g Father, Mother, Sister..."
-          value={relationship}
-          onChange={(e) => setRelationship(e.target.value)}
-        />
-
-        <button type="submit">
-          <Button btnTxt="Add Sponsor" />
-        </button>
-      </form>
-    </div>
-  );
-};
-
+import { useRelationships } from "../../contexts/RelationshipContexts";
 
 const BillDetails = () => {
-  const navigate = useNavigate()
-  const [showModal, setShowModal] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
+  const navigate = useNavigate();
+  const { relationships } = useRelationships();
 
-  const [sponsors, setSponsors] = useState([
-    { id: 1, name: "Ngozi", relationship: "Mother", phone: "080..." },
-  ]);
-  const [billData, setBillData] = useState({});
+  const [errors, setErrors] = useState({});
+  const [selectedSponsor, setSelectedSponsor] = useState(null);
 
-  const onAddSponsor = (newSponsor) => {
-    setSponsors((prev) => [...prev, newSponsor]);
+  const [billData, setBillData] = useState({
+    billType: "",
+    serviceProvider: "",
+    frequency: "",
+    amount: "",
+    accountNumber: "",
+    timeOfDay: "",
+    scheduledDate: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setBillData((prev) => ({ ...prev, [name]: value }));
+
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
   };
 
-  // const handleSelectSponsor = (sponsor) => {
-  //   setSelectedSponsor(sponsor);
-  // };
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!billData.billType.trim()) {
+      newErrors.billType = "Bill type is required";
+    }
+
+    if (!billData.serviceProvider.trim()) {
+      newErrors.serviceProvider = "Service provider is required";
+    }
+
+    if (!billData.frequency.trim()) {
+      newErrors.frequency = "Frequency is required";
+    }
+
+    if (!billData.amount.trim()) {
+      newErrors.amount = "Amount is required";
+    }
+
+    if (!billData.accountNumber.trim()) {
+      newErrors.accountNumber = "Account number is required";
+    }
+
+    if (!billData.timeOfDay.trim()) {
+      newErrors.timeOfDay = "Time of day is required";
+    }
+
+    if (!billData.scheduledDate.trim()) {
+      newErrors.scheduledDate = "Scheduled date is required";
+    }
+
+    if (!selectedSponsor) {
+      newErrors.sponsor = "Please select a sponsor";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSelectSponsor = (sponsor) => {
+    setSelectedSponsor(sponsor);
+    setErrors((prev) => ({ ...prev, sponsor: "" }));
+  };
+
+  const handleProceed = () => {
+    if (validateForm()) {
+      // Save bill data temporarily to pass to confirm page
+      const billToSave = {
+        ...billData,
+        sponsorId: selectedSponsor.id,
+        sponsorName: selectedSponsor.fullName,
+        sponsorRelationship: selectedSponsor.relationshipType,
+      };
+
+      // Save to localStorage temporarily for the confirm page
+      localStorage.setItem("temp_bill_data", JSON.stringify(billToSave));
+
+      navigate("/dashboard/confirm-details");
+    }
+  };
 
   return (
     <div className="p-5 sm:p-6 lg:p-8 bg-[#ECE8F0] min-h-screen">
@@ -102,90 +107,140 @@ const BillDetails = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-x-20 md:gap-y-6 lg:w-[80%] xl:w-[60%]">
         <InputField
           inputLabel="Bill Type"
-          inputSpan="E.g Rent, Tuition"
-          onChange={(e) => setBillData({ ...billData, type: e.target.value })}
+          inputSpan="E.g Rent, Tuition, Electricity"
+          placeholder="Enter bill type"
+          name="billType"
+          value={billData.billType}
+          onChange={handleChange}
+          error={errors.billType}
         />
 
         <InputField
           inputLabel="Service Provider"
-          onChange={(e) =>
-            setBillData({ ...billData, provider: e.target.value })
-          }
+          placeholder="E.g PHCN, School name"
+          name="serviceProvider"
+          value={billData.serviceProvider}
+          onChange={handleChange}
+          error={errors.serviceProvider}
         />
 
         <InputField
           inputLabel="Frequency"
-          onChange={(e) =>
-            setBillData({ ...billData, frequency: e.target.value })
-          }
+          placeholder="Monthly, Weekly, One-time"
+          name="frequency"
+          value={billData.frequency}
+          onChange={handleChange}
+          error={errors.frequency}
         />
 
         <InputField
           inputLabel="Amount"
-          onChange={(e) =>
-            setBillData({ ...billData, amount: e.target.value })
-          }
+          placeholder="₦50,000"
+          name="amount"
+          value={billData.amount}
+          onChange={handleChange}
+          error={errors.amount}
         />
 
         <InputField
           inputLabel="Account Number/Biller ID"
-          onChange={(e) =>
-            setBillData({ ...billData, account: e.target.value })
-          }
+          placeholder="Enter account number"
+          name="accountNumber"
+          value={billData.accountNumber}
+          onChange={handleChange}
+          error={errors.accountNumber}
+        />
+
+        <InputField
+          inputLabel="Scheduled Date"
+          type="date"
+          name="scheduledDate"
+          value={billData.scheduledDate}
+          onChange={handleChange}
+          error={errors.scheduledDate}
         />
 
         <InputField
           inputLabel="What time of day should this be sent?"
-          onChange={(e) =>
-            setBillData({ ...billData, timeOfDay: e.target.value })
-          }
+          placeholder="Morning, Afternoon, Evening"
+          name="timeOfDay"
+          value={billData.timeOfDay}
+          onChange={handleChange}
+          error={errors.timeOfDay}
         />
       </div>
 
       {/* Choose sponsor */}
       <div className="pt-12 sm:pt-16">
-        <h2 className="text-base text-[#252323] font-bold pb-8">
+        <h2 className="text-base text-[#252323] font-bold pb-4">
           Choose Sponsor
         </h2>
 
-        {sponsors.map((sp) => (
-          <div
-            key={sp.id}
-            // onClick={() => handleSelectSponsor(sp)}
-            className="flex gap-4 items-center pb-8 sm:pb-12 cursor-pointer"
-          >
-            <img src={avatar} className="w-[60px] h-[60px]" />
-            <p className="text-sm font-bold">
-              <span className="text-gray-500">{sp.relationship}</span> / {sp.name}
+        {errors.sponsor && (
+          <p className="text-red-500 text-sm mb-4">{errors.sponsor}</p>
+        )}
+
+        {relationships.length === 0 ? (
+          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+            <p className="text-sm text-gray-700">
+              You haven't added any sponsors yet.
             </p>
-
-            <Button btnTxt="Choose" onClick={() => navigate("/dashboard/confirm-details")} />
+            <button
+              onClick={() => navigate("/dashboard/create-relationship")}
+              className="text-[#401C6D] font-bold text-sm mt-2 underline"
+            >
+              Add a sponsor first →
+            </button>
           </div>
-        ))}
+        ) : (
+          <div className="space-y-4 mb-8">
+            {relationships.map((sponsor) => (
+              <div
+                key={sponsor.id}
+                className={`flex gap-2 sm:gap-3 items-center px-2 py-4 rounded-lg border-2 transition-all ${
+                  selectedSponsor?.id === sponsor.id
+                    ? "border-[#401C6D] bg-purple-50"
+                    : "border-gray-200 bg-white"
+                }`}
+              >
+                <RxAvatar className="w-[45px] h-[45px] md:w-[65px] md:h-[65px] text-[#70588e]" />
+                <div className="flex-1">
+                  <p className="text-sm font-bold">
+                    <span className="text-gray-500">
+                      {sponsor.relationshipType}
+                    </span>
+                    / {sponsor.fullName}
+                  </p>
+                  <p className="text-xs text-gray-500">{sponsor.email}</p>
+                </div>
 
-        <ButtonGold
-          btnTxt="Add new Sponsor"
-          onClick={() => setShowModal(true)}
-        />
-      </div>
+                <Button
+                  btnTxt={
+                    selectedSponsor?.id === sponsor.id ? "Selected" : "Choose"
+                  }
+                  onClick={() => handleSelectSponsor(sponsor)}
+                  className={
+                    selectedSponsor?.id === sponsor.id
+                      ? "bg-[#401C6D]"
+                      : "bg-gray-400"
+                  }
+                />
+              </div>
+            ))}
+          </div>
+        )}
 
-
-      {/* Add sponsor modal */}
-      {showModal && (
-        <div className="fixed inset-0 bg-black/80 flex justify-center items-center z-50 w-full px-6">
-          <AddNewSponsor
-            onClose={() => setShowModal(false)}
-            onAddSponsor={onAddSponsor}
+        <div className="flex gap-4">
+          <ButtonGold
+            btnTxt="Add new Sponsor"
+            onClick={() => navigate("/dashboard/create-relationship")}
           />
-        </div>
-      )}
 
-      {/* Success modal */}
-      {showSuccess && (
-        <div className="fixed inset-0 bg-black/80 flex justify-center items-center z-50 w-full px-6">
-          <ScheduleSuccess onClose={() => setShowSuccess(false)} />
+          {relationships.length > 0 && (
+            <Button btnTxt="Proceed to Review" onClick={handleProceed} />
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 };
