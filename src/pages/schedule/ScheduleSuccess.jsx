@@ -5,7 +5,7 @@ const ScheduleSuccess = ({ onClose }) => {
   const navigate = useNavigate();
 
   const viewBills = () => {
-    navigate("/dashboard/schedule-bills");
+    navigate("/dashboard/scheduled-bills");
   };
   return (
     <div className="bg-white rounded-2xl p-8 max-w-2xl w-full text-center relative">

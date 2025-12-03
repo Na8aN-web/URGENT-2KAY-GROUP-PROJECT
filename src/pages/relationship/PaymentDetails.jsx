@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import avatar from "./img/avatar.png";
+import { useParams } from "react-router-dom";
+import { RxAvatar } from "react-icons/rx";
 import money from "../../assets/images/money_16384325.png";
 import bundles from "../../assets/images/money_16384325.png";
 import BackButton from "../../components/BackButton";
 import { CiSearch, CiCalendarDate } from "react-icons/ci";
 import { FaAngleDown } from "react-icons/fa6";
+import { useRelationships } from "../../contexts/RelationshipContexts";
 
 const ViewDetails = ({ onClose }) => {
   return (
@@ -50,7 +52,10 @@ const ViewDetails = ({ onClose }) => {
 };
 
 const PaymentDetails = () => {
+  const { id } = useParams();
   const [showViewDetails, setShowViewDetails] = useState(false);
+  const { getRelationshipById } = useRelationships();
+  const sponsor = getRelationshipById(id);
   const payments = [
     {
       id: 1,
@@ -79,10 +84,12 @@ const PaymentDetails = () => {
         </h2>
         <div className="relative flex flex-col md:flex-row justify-between p-3 sm:p-4 md:p-5">
           <div className="flex items-center gap-4">
-            <img src={avatar} alt="" className="h-[85px] w-[85px]" />
+            <RxAvatar className="w-[65px] h-[65px] md:w-[85px] md:h-[85px] text-[#70588e]" />
             <div>
-              <p className="text-base font-bold">Mrs Kamasi</p>
-              <span className="text-sm font-bold">Mother</span>
+              <p className="text-base font-bold">{sponsor.fullName}</p>
+              <span className="text-sm font-bold">
+                {sponsor.relationshipType}
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-12 md:gap-6 py-8">
@@ -91,7 +98,7 @@ const PaymentDetails = () => {
                 Total Amount Sponsored:
               </p>
               <div className="flex gap-2 items-center">
-                <img src={money} alt="" className="w-[18px] h-[18px]" />
+                <img src={money} alt="money.png" className="w-[18px] h-[18px]" />
                 <span className="text-[#000000] text-lg font-meduim">
                   N32,500
                 </span>

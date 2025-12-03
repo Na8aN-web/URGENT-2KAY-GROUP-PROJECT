@@ -219,7 +219,7 @@ export default function DashboardLayout() {
           </NavLink>
 
           <NavLink
-            to="/dashboard/schedule-bill"
+            to="/dashboard/scheduled-bill"
             onClick={closeSidebar}
             className={({ isActive }) =>
               `w-full flex items-center gap-3 px-4 py-3 rounded-lg mb-4 transition-colors ${

@@ -1,52 +1,255 @@
-import React from "react";
-import { IoChevronBack } from "react-icons/io5";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import ButtonGold from "../../components/ButtonGold";
 import BackButton from "../../components/BackButton";
+import { useBills } from "../../contexts/BillsContext";
+
+const BillCard = ({ bill, onEdit, onCancel, onSendNow }) => {
+  const getStatusColor = (status) => {
+    switch (status) {
+      case "Pending":
+        return "text-yellow-600";
+      case "Sent":
+        return "text-blue-600";
+      case "Paid":
+        return "text-green-600";
+      case "Cancelled":
+        return "text-red-600";
+      default:
+        return "text-gray-600";
+    }
+  };
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
+  };
+
+  return (
+    <div className="bg-white p-4 rounded-lg shadow-sm mb-4">
+      <div className="flex flex-col text-sm text-gray-700 space-y-2">
+        <p>
+          Bill Type: <span className="font-semibold">{bill.billType}</span>
+        </p>
+        <p>
+          Service Provider: <span className="font-semibold">{bill.serviceProvider}</span>
+        </p>
+        <p>
+          Sponsor: <span className="font-semibold">{bill.sponsorName}</span>
+        </p>
+        <p>
+          Amount: <span className="font-semibold">{bill.amount}</span>
+        </p>
+        <p>
+          Frequency: <span className="font-semibold">{bill.frequency}</span>
+        </p>
+        <p>
+          Scheduled Date: <span className="font-semibold">{formatDate(bill.scheduledDate)}</span>
+        </p>
+        <p>
+          Time: <span className="font-semibold">{bill.timeOfDay}</span>
+        </p>
+        <p>
+          Status: <span className={`font-semibold ${getStatusColor(bill.status)}`}>{bill.status}</span>
+        </p>
+      </div>
+
+      <div className="flex flex-col sm:flex-row gap-3 mt-6">
+        {bill.status === "Pending" && (
+          <>
+            <ButtonGold
+              btnTxt="Cancel"
+              className="w-full"
+              onClick={() => onCancel(bill.id)}
+            />
+            <ButtonGold
+              btnTxt="Edit"
+              className="w-full"
+              onClick={() => onEdit(bill.id)}
+            />
+            <Button
+              btnTxt="Send now"
+              className="w-full"
+              onClick={() => onSendNow(bill.id)}
+            />
+          </>
+        )}
+        {bill.status === "Sent" && (
+          <div className="text-center text-sm text-gray-500 py-2">
+            Bill has been sent to sponsor
+          </div>
+        )}
+        {bill.status === "Cancelled" && (
+          <div className="text-center text-sm text-red-500 py-2">
+            This bill has been cancelled
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
 
 const ScheduledBills = () => {
+  const navigate = useNavigate();
+  const { bills, updateBillStatus, getTodaysBills } = useBills();
+  const [showCancelConfirm, setShowCancelConfirm] = useState(false);
+  const [billToCancel, setBillToCancel] = useState(null);
+
+  const todaysBills = getTodaysBills();
+  const upcomingBills = bills.filter(bill => {
+    const billDate = new Date(bill.scheduledDate);
+    const today = new Date();
+    return billDate > today && bill.status === "Pending";
+  });
+  const pastBills = bills.filter(bill => {
+    const billDate = new Date(bill.scheduledDate);
+    const today = new Date();
+    return billDate < today || bill.status !== "Pending";
+  });
+
+  const handleEdit = (billId) => {
+    // Store bill ID for editing
+    const bill = bills.find(b => b.id === billId);
+    if (bill) {
+      localStorage.setItem('temp_bill_data', JSON.stringify(bill));
+      navigate("/dashboard/bill-details");
+    }
+  };
+
+  const handleCancelClick = (billId) => {
+    setBillToCancel(billId);
+    setShowCancelConfirm(true);
+  };
+
+  const confirmCancel = () => {
+    if (billToCancel) {
+      updateBillStatus(billToCancel, "Cancelled");
+      setShowCancelConfirm(false);
+      setBillToCancel(null);
+    }
+  };
+
+  const handleSendNow = (billId) => {
+    updateBillStatus(billId, "Sent");
+  };
+
+  const handleAddNewBill = () => {
+    navigate("/dashboard/bill-details");
+  };
+
+  if (bills.length === 0) {
+    return (
+      <div className="p-5 sm:p-6 lg:p-8 bg-[#ECE8F0] min-h-screen">
+        <BackButton />
+        <h1 className="text-lg font-bold text-[#252323] pb-8">
+          Scheduled Bills
+        </h1>
+        <div className="text-center py-12">
+          <p className="text-gray-500 mb-4">No bills scheduled yet</p>
+          <Button
+            btnTxt="Schedule Your First Bill"
+            onClick={handleAddNewBill}
+          />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="p-4 sm:p-6 lg:p-8 bg-[#ECE8F0] min-h-screen">
       <BackButton />
-      <h1 className="text-lg font-bold text-[#252323] pb-8">
-        Scheduled Bills
-      </h1>
-
-      <div className="bg-[#fafafa] px-4 py-4 rounded-md min-h-[70vh]">
-        <h2 className="text-sm font-medium text-gray-700">Today</h2>
-
-        {/* Middle: Bill detail */}
-        <div className="flex flex-col text-sm text-gray-700 space-y-1 bg-[#ffffff] p-3 my-8 rounded-sm sm:w-fit">
-          <p>
-            Bill Type: <span className="font-semibold">Rent</span>
-          </p>
-          <p>
-            Sponsor: <span className="font-semibold">Mummy</span>
-          </p>
-          <p>
-            Amount: <span className="font-semibold">₦500,000</span>
-          </p>
-          <p>
-            Scheduled Date:
-            <span className="font-semibold">21st May, 2026</span>
-          </p>
-          <p>
-            Time: <span className="font-semibold">9:00am</span>
-          </p>
-          <p>
-            Status:
-            <span className="font-semibold text-yellow-600">Pending</span>
-          </p>
-        </div>
-
-        {/*  Buttons */}
-        <div className="flex flex-col sm:flex-row gap-3 w-full">
-          <ButtonGold btnTxt="Cancel" className="w-full" />
-          <ButtonGold btnTxt="Edit" className="w-full" />
-          <Button btnTxt="Send now" className="w-full" />
-        </div>
+      
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-lg font-bold text-[#252323]">
+          Scheduled Bills
+        </h1>
+        <Button
+          btnTxt="+ New Bill"
+          onClick={handleAddNewBill}
+          className="text-sm"
+        />
       </div>
+
+      <div className="bg-[#fafafa] px-4 py-6 rounded-md min-h-[70vh]">
+        {/* Today's Bills */}
+        {todaysBills.length > 0 && (
+          <div className="mb-8">
+            <h2 className="text-base font-semibold text-gray-700 mb-4">Today</h2>
+            {todaysBills.map(bill => (
+              <BillCard
+                key={bill.id}
+                bill={bill}
+                onEdit={handleEdit}
+                onCancel={handleCancelClick}
+                onSendNow={handleSendNow}
+              />
+            ))}
+          </div>
+        )}
+
+        {/* Upcoming Bills */}
+        {upcomingBills.length > 0 && (
+          <div className="mb-8">
+            <h2 className="text-base font-semibold text-gray-700 mb-4">Upcoming</h2>
+            {upcomingBills.map(bill => (
+              <BillCard
+                key={bill.id}
+                bill={bill}
+                onEdit={handleEdit}
+                onCancel={handleCancelClick}
+                onSendNow={handleSendNow}
+              />
+            ))}
+          </div>
+        )}
+
+        {/* Past Bills */}
+        {pastBills.length > 0 && (
+          <div>
+            <h2 className="text-base font-semibold text-gray-700 mb-4">Past</h2>
+            {pastBills.map(bill => (
+              <BillCard
+                key={bill.id}
+                bill={bill}
+                onEdit={handleEdit}
+                onCancel={handleCancelClick}
+                onSendNow={handleSendNow}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Cancel Confirmation Modal */}
+      {showCancelConfirm && (
+        <div className="fixed inset-0 bg-black/80 flex justify-center items-center z-50 w-full px-6">
+          <div className="bg-white rounded-2xl p-8 max-w-md w-full text-center">
+            <h2 className="text-xl font-bold text-[#252323] mb-4">
+              Cancel Bill?
+            </h2>
+            <p className="text-gray-600 text-sm mb-6">
+              Are you sure you want to cancel this scheduled bill?
+            </p>
+            <div className="flex gap-3">
+              <ButtonGold
+                btnTxt="No, Keep It"
+                className="w-full"
+                onClick={() => setShowCancelConfirm(false)}
+              />
+              <Button
+                btnTxt="Yes, Cancel"
+                className="w-full bg-red-500"
+                onClick={confirmCancel}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
