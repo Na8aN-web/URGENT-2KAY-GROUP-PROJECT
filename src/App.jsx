@@ -13,7 +13,6 @@ import ServiceProvider from "./pages/user-dashboard/ServiceProvider.jsx";
 import SubmitRequest from "./pages/user-dashboard/SubmitRequest.jsx";
 import Notifications from "./pages/user-dashboard/Notifications.jsx";
 import LandingPage from "./pages/LandingPage";
-import ScheduleBill from "./pages/schedule/ScheduleBill";
 import ScheduleBills from "./pages/schedule/ScheduledBills";
 import BillDetails from "./pages/schedule/BillDetails";
 import ReviewConfirmBill from "./pages/schedule/ReviewConfirmBill";
@@ -114,7 +113,6 @@ function App() {
                 path="transaction-history"
                 element={<TransactionHistory />}
               />
-              <Route path="scheduled-bill" element={<ScheduleBill />} />
               <Route path="scheduled-bills" element={<ScheduleBills />} />
               <Route path="bill-details" element={<BillDetails />} />
               <Route path="confirm-details" element={<ReviewConfirmBill />} />
